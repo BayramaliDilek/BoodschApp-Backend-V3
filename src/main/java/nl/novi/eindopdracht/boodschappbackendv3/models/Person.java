@@ -11,9 +11,7 @@ import javax.persistence.*;
 import static javax.persistence.GenerationType.AUTO;
 
 
-@NoArgsConstructor @AllArgsConstructor
 @Entity
-@Table
 public class Person {
 
 
@@ -22,7 +20,6 @@ public class Person {
     private Long id;
     private String firstname;
     private String lastname;
-    private String email;
     private String streetName;
     private String houseNumber;
     private String houseNumberAdd;
@@ -30,8 +27,8 @@ public class Person {
     private String zipcode;
     private String radius;
 
-@OneToOne
-
+    @OneToOne(mappedBy = "person")
+    User user;
 
     public Long getId() {
         return id;
@@ -56,12 +53,6 @@ public class Person {
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) { this.email = email; }
 
     public String getStreetName() {
         return streetName;

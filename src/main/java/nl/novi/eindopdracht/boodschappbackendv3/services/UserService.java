@@ -1,6 +1,7 @@
 package nl.novi.eindopdracht.boodschappbackendv3.services;
 
 import nl.novi.eindopdracht.boodschappbackendv3.dtos.UserDto;
+import nl.novi.eindopdracht.boodschappbackendv3.exceptions.RecordNotFoundException;
 import nl.novi.eindopdracht.boodschappbackendv3.exceptions.UsernameNotFoundException;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Authority;
 import nl.novi.eindopdracht.boodschappbackendv3.models.User;
@@ -26,8 +27,8 @@ public class UserService {
 
     public List<UserDto> getUsers() {
         List<UserDto> collection = new ArrayList<>();
-        List<User> userList = userRepository.findAll();
-        for (User user : userList) {
+        List<User> list = userRepository.findAll();
+        for (User user : list) {
             collection.add(fromUser(user));
         }
         return collection;
@@ -49,7 +50,7 @@ public class UserService {
         return userRepository.existsById(username);
     }
 
-    public String saveUser(UserDto userDto) {
+    public String createUser(UserDto userDto) {
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         userDto.setApikey(randomString);
         User newUser = userRepository.save(toUser(userDto));
@@ -61,7 +62,7 @@ public class UserService {
     }
 
     public void updateUser(String username, UserDto newUser) {
-        if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
+        if (!userRepository.existsById(username)) throw new RecordNotFoundException();
         User user = userRepository.findById(username).get();
         user.setPassword(newUser.getPassword());
         userRepository.save(user);
@@ -98,6 +99,8 @@ public class UserService {
         dto.password = user.getPassword();
         dto.authorities = user.getAuthorities();
         dto.apikey = user.getApikey();
+        dto.email = user.getEmail();
+        dto.enabled = user.isEnabled();
 
         return dto;
     }
@@ -109,6 +112,8 @@ public class UserService {
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
         user.setApikey(userDto.getApikey());
+        user.setEnabled(userDto.getEnabled());
+        user.setEmail(userDto.getEmail());
 
         return user;
     }

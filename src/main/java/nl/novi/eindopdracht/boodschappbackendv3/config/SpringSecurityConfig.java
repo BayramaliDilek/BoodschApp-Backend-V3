@@ -1,6 +1,5 @@
 package nl.novi.eindopdracht.boodschappbackendv3.config;
 
-import lombok.AllArgsConstructor;
 import nl.novi.eindopdracht.boodschappbackendv3.filter.JwtRequestFilter;
 import nl.novi.eindopdracht.boodschappbackendv3.services.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,22 +18,18 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@AllArgsConstructor
-public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-    private final CustomUserDetailService customUserDetailService;
-//    @Autowired
-//    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    public CustomUserDetailService customUserDetailService;
 
-
+    @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserDetailService)
-//                .passwordEncoder(bCryptPasswordEncoder)
-        ;
+        auth.userDetailsService(customUserDetailService);
     }
 
     @Override
@@ -46,12 +41,6 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth)
-            throws Exception {
-
     }
 
 
@@ -69,7 +58,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/users/**").hasRole("ADMIN")
                 .antMatchers("/userprofile/**").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/products/**").hasAnyRole("USER", "ADMIN")
+
+                .antMatchers("/products").permitAll()
                 .antMatchers("/deliveryrequest/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/delivery/**").hasAnyRole("USER", "ADMIN")
 

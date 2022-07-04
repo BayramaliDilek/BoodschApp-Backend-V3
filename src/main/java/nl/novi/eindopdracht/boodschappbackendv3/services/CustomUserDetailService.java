@@ -15,12 +15,8 @@ import java.util.Set;
 
 @Service
 public class CustomUserDetailService implements UserDetailsService {
-
-    private final UserService userService;
     @Autowired
-    public CustomUserDetailService(UserService userService) {
-        this.userService = userService;
-    }
+    private UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) {

@@ -10,7 +10,7 @@
     </parent>
     <groupId>nl.novi.eindopdracht</groupId>
     <artifactId>BoodschApp-Backend-V3</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.1.0</version>
     <name>BoodschApp-Backend-V3</name>
     <description>BoodschApp-Backend-V3</description>
     <properties>

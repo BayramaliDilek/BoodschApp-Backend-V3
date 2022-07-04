@@ -19,7 +19,6 @@ import java.security.Principal;
 @RestController
 public class AuthenticationController {
 
-
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -27,7 +26,7 @@ public class AuthenticationController {
     private CustomUserDetailService customUserDetailService;
 
     @Autowired
-    private JwtUtil jwtUtil;
+    JwtUtil jwtUtil;
 
     @GetMapping(value = "/authenticated")
     public ResponseEntity<Object> authenticated(Authentication authentication, Principal principal) {
