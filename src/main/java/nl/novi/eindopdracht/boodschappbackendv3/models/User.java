@@ -19,13 +19,17 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
-
     @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
+    private boolean enabled = true;
 
     @Column
     private String apikey;
 
+    @Column
+    private String email;
 
     @OneToMany(
             targetEntity = Authority.class,
@@ -55,12 +59,28 @@ public class User {
         this.password = password;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public String getApikey() {
         return apikey;
     }
 
     public void setApikey(String apikey) {
         this.apikey = apikey;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Set<Authority> getAuthorities() {

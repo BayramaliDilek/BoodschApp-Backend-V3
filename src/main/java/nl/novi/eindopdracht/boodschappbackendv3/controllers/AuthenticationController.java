@@ -2,7 +2,7 @@ package nl.novi.eindopdracht.boodschappbackendv3.controllers;
 
 import nl.novi.eindopdracht.boodschappbackendv3.payload.AuthenticationRequest;
 import nl.novi.eindopdracht.boodschappbackendv3.payload.AuthenticationResponse;
-import nl.novi.eindopdracht.boodschappbackendv3.services.UserDetailsService;
+import nl.novi.eindopdracht.boodschappbackendv3.services.CustomUserDetailService;
 import nl.novi.eindopdracht.boodschappbackendv3.utils.JwtUtil;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +19,12 @@ import java.security.Principal;
 @RestController
 public class AuthenticationController {
 
-    /*autowire authentionManager, userDetailService en jwtUtil*/
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private CustomUserDetailService customUserDetailService;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -48,7 +48,7 @@ public class AuthenticationController {
             throw new Exception("Incorrect username or password", ex);
         }
 
-        final UserDetails userDetails = userDetailsService
+        final UserDetails userDetails = customUserDetailService
                 .loadUserByUsername(username);
 
         final String jwt = jwtUtil.generateToken(userDetails);

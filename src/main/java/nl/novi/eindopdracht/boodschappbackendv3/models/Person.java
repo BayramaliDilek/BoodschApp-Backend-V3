@@ -14,7 +14,7 @@ import static javax.persistence.GenerationType.AUTO;
 @NoArgsConstructor @AllArgsConstructor
 @Entity
 @Table
-public class Person extends UserDto {
+public class Person {
 
 
     @Id
@@ -30,6 +30,7 @@ public class Person extends UserDto {
     private String zipcode;
     private String radius;
 
+@OneToOne
 
 
     public Long getId() {

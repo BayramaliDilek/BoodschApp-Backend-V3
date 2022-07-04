@@ -1,6 +1,6 @@
 package nl.novi.eindopdracht.boodschappbackendv3.filter;
 
-import nl.novi.eindopdracht.boodschappbackendv3.services.UserDetailsService;
+import nl.novi.eindopdracht.boodschappbackendv3.services.CustomUserDetailService;
 import nl.novi.eindopdracht.boodschappbackendv3.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,7 +20,7 @@ import java.io.IOException;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private CustomUserDetailService customUserDetailService;
     @Autowired
     private JwtUtil jwtUtil;
 
@@ -38,7 +38,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = this.customUserDetailService.loadUserByUsername(username);
 
             if (jwtUtil.validateToken(jwt, userDetails)) {
 

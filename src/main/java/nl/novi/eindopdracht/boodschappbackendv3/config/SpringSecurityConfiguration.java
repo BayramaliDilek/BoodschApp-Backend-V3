@@ -1,8 +1,8 @@
 package nl.novi.eindopdracht.boodschappbackendv3.config;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import nl.novi.eindopdracht.boodschappbackendv3.filter.JwtRequestFilter;
-import nl.novi.eindopdracht.boodschappbackendv3.services.UserDetailsService;
+import nl.novi.eindopdracht.boodschappbackendv3.services.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,20 +19,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private final UserDetailsService userDetailsService;
 
+    private final CustomUserDetailService customUserDetailService;
+//    @Autowired
 //    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
+
     private JwtRequestFilter jwtRequestFilter;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService)
+        auth.userDetailsService(customUserDetailService)
 //                .passwordEncoder(bCryptPasswordEncoder)
         ;
     }
@@ -51,9 +51,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER").and()
-                .withUser("admin").password("password").roles("USER", "ADMIN");
+
     }
 
 
@@ -61,8 +59,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                .httpBasic()
-                .and()
+                .httpBasic().disable()
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/users").permitAll()
