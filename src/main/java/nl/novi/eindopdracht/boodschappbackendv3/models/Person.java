@@ -1,21 +1,36 @@
 package nl.novi.eindopdracht.boodschappbackendv3.models;
 
 
-public class Person {
+import lombok.AllArgsConstructor;
 
+import lombok.NoArgsConstructor;
+import nl.novi.eindopdracht.boodschappbackendv3.dtos.UserDto;
+
+import javax.persistence.*;
+
+import static javax.persistence.GenerationType.AUTO;
+
+
+@NoArgsConstructor @AllArgsConstructor
+@Entity
+@Table
+public class Person extends UserDto {
+
+
+    @Id
+    @GeneratedValue(strategy = AUTO)
     private Long id;
     private String firstname;
     private String lastname;
+    private String email;
     private String streetName;
     private String houseNumber;
     private String houseNumberAdd;
     private String city;
     private String zipcode;
-    private String emailAdress;
     private String radius;
 
-    public Person() {
-    }
+
 
     public Long getId() {
         return id;
@@ -40,6 +55,12 @@ public class Person {
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) { this.email = email; }
 
     public String getStreetName() {
         return streetName;
@@ -81,13 +102,6 @@ public class Person {
         this.zipcode = zipcode;
     }
 
-    public String getEmailAdress() {
-        return emailAdress;
-    }
-
-    public void setEmailAdress(String emailAdress) {
-        this.emailAdress = emailAdress;
-    }
 
     public String getRadius() {
         return radius;
@@ -96,4 +110,5 @@ public class Person {
     public void setRadius(String radius) {
         this.radius = radius;
     }
+
 }

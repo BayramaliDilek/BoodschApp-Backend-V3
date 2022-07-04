@@ -1,24 +1,40 @@
 package nl.novi.eindopdracht.boodschappbackendv3.models;
 
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
-@Table
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+import static javax.persistence.GenerationType.AUTO;
+
+@Entity @Data @NoArgsConstructor @AllArgsConstructor
+@Table(name = "users")
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = AUTO)
     @Column(nullable = false, unique = true)
     private String username;
 
-    @Column
-    private String emailAdress;
 
-    @Column
+    @Column(nullable = false)
     private String password;
 
     @Column
     private String apikey;
+
+
+    @OneToMany(
+            targetEntity = Authority.class,
+            mappedBy = "username",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER)
+    private Set<Authority> authorities = new HashSet<>();
+
 
 
 
@@ -30,13 +46,6 @@ public class User {
         this.username = username;
     }
 
-    public String getEmailAdress() {
-        return emailAdress;
-    }
-
-    public void setEmailAdress(String emailAdress) {
-        this.emailAdress = emailAdress;
-    }
 
     public String getPassword() {
         return password;
@@ -52,6 +61,18 @@ public class User {
 
     public void setApikey(String apikey) {
         this.apikey = apikey;
+    }
+
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void addAuthority(Authority authority) {
+        this.authorities.add(authority);
+    }
+
+    public void removeAuthority(Authority authority) {
+        this.authorities.remove(authority);
     }
 
 
