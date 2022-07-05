@@ -24,6 +24,7 @@ public class UserService {
         return userRepository.existsById(username);
     }
 
+
     @Autowired
     private final UserRepository userRepository;
 
@@ -54,7 +55,13 @@ public class UserService {
 
     public String createUser(UserDto userDto) {
 
-        if (userExists(userDto.getUsername())) {
+        Optional<User> userOptional = userRepository
+                .findUserByEmail(userDto.getEmail());
+        if (userOptional.isPresent()) {
+            throw new RecordNotFoundException("oei er ging iets fout.. Controleer uw gegevens, het kan zijn dat uw email al in gebruik is..");
+        }
+
+        if (userExists(userDto.getUsername()))  {
             throw new UsernameAlreadyExistException("Username is al in gebuik!");
 
         }
