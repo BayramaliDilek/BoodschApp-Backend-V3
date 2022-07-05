@@ -1,27 +1,48 @@
-package nl.novi.eindopdracht.boodschappbackendv3.models;
+package nl.novi.eindopdracht.boodschappbackendv3.dtos;
 
+import nl.novi.eindopdracht.boodschappbackendv3.models.Person;
 
-import javax.persistence.*;
+import javax.persistence.Id;
 
+public class PersonDto {
 
-@Entity
-@Table(name = "persons")
-public class Person {
-
-    @GeneratedValue
     @Id
-    private Long id;
-    private String firstname;
-    private String lastname;
-    private String streetName;
-    private String houseNumber;
-    private String houseNumberAdd;
-    private String city;
-    private String zipcode;
-    private String radius;
+    public Long id;
 
-    @OneToOne(mappedBy = "person")
-    User user;
+    public String firstname;
+    public String lastname;
+    public String streetName;
+    public String houseNumber;
+    public String houseNumberAdd;
+    public String city;
+    public String zipcode;
+    public String radius;
+
+
+    public static PersonDto fromPerson(Person person) {
+
+        var dto = new PersonDto();
+
+        dto.id = person.getId();
+
+        dto.firstname = person.getFirstname();
+
+        dto.lastname = person.getLastname();
+
+        dto.streetName = person.getStreetName();
+
+        dto.houseNumber = person.getHouseNumber();
+
+        dto.houseNumberAdd = person.getHouseNumberAdd();
+
+        dto.city = person.getCity();
+
+        dto.zipcode = person.getZipcode();
+
+        dto.radius = person.getRadius();
+
+        return dto;
+    }
 
     public Long getId() {
         return id;
@@ -87,16 +108,11 @@ public class Person {
         this.zipcode = zipcode;
     }
 
-
     public String getRadius() {
         return radius;
     }
 
     public void setRadius(String radius) {
         this.radius = radius;
-    }
-
-    public String getEmail() {
-        return null;
     }
 }
