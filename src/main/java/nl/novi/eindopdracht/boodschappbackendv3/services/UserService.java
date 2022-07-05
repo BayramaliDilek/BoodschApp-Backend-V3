@@ -59,6 +59,8 @@ public class UserService {
 
         }
 
+        userDto.setEmail(userDto.getEmail());
+
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
 
         userDto.setApikey(randomString);
