@@ -20,7 +20,6 @@ import static javax.persistence.GenerationType.AUTO;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = AUTO)
     @Column(nullable = false, unique = true)
     private String username;
 
