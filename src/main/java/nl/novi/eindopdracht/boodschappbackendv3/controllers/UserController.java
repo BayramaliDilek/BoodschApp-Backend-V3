@@ -38,8 +38,8 @@ public class UserController {
 
     }
 
-    @PostMapping(value = "/save")
-    public ResponseEntity<UserDto> saveUser(@RequestBody UserDto dto) {
+    @PostMapping(value = "/create")
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto dto) {
 
         String newUsername = userService.createUser(dto);
         userService.addAuthority(newUsername, "ROLE_USER");

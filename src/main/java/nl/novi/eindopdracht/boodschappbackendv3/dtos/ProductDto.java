@@ -1,36 +1,23 @@
-package nl.novi.eindopdracht.boodschappbackendv3.models;
-
-import lombok.Data;
-
-import javax.persistence.*;
-
-@Data
-@Entity
-@Table(name = "products")
-public class Product {
+package nl.novi.eindopdracht.boodschappbackendv3.dtos;
 
 
-    @Id
-    @GeneratedValue
-    @Column(name = "product_id")
+public class ProductDto {
+
     public Long id;
-    @Column(name = "product_name")
     public String productName;
-    @Column(name = "product_type")
     public String productType;
-    @Column(
-            name = "product_description",
-            length = 1000
-    )
     public String description;
-    @Column(
-            name = "product_ingredients",
-            length = 1000
-    )
     public String ingredients;
-    @Column(name = "product_price")
     public Float price;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getProductName() {
         return productName;
@@ -72,4 +59,3 @@ public class Product {
         this.price = price;
     }
 }
-

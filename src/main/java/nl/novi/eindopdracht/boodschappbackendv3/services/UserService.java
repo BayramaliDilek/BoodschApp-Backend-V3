@@ -2,6 +2,7 @@ package nl.novi.eindopdracht.boodschappbackendv3.services;
 
 import nl.novi.eindopdracht.boodschappbackendv3.dtos.UserDto;
 import nl.novi.eindopdracht.boodschappbackendv3.exceptions.RecordNotFoundException;
+import nl.novi.eindopdracht.boodschappbackendv3.exceptions.UsernameAlreadyExistException;
 import nl.novi.eindopdracht.boodschappbackendv3.exceptions.UsernameNotFoundException;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Authority;
 import nl.novi.eindopdracht.boodschappbackendv3.models.User;
@@ -17,6 +18,11 @@ import java.util.Set;
 
 @Service
 public class UserService {
+
+
+    public boolean userExists(String username) {
+        return userRepository.existsById(username);
+    }
 
     @Autowired
     private final UserRepository userRepository;
@@ -46,16 +52,22 @@ public class UserService {
     }
 
 
-    public boolean userExists(String username) {
-        return userRepository.existsById(username);
-    }
-
     public String createUser(UserDto userDto) {
+
+        if (userExists(userDto.getUsername())) {
+            throw new UsernameAlreadyExistException("Username is al in gebuik!");
+
+        }
+
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
+
         userDto.setApikey(randomString);
+
         User newUser = userRepository.save(toUser(userDto));
+
         return newUser.getUsername();
     }
+
 
     public void deleteUser(String username) {
         userRepository.deleteById(username);
