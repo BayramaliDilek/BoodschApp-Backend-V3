@@ -1,13 +1,24 @@
 package nl.novi.eindopdracht.boodschappbackendv3.models;
 
-public class Product {
+import javax.persistence.*;
 
+@Entity
+@Table(name = "products")
+public class Product {
+    @Id
+    @GeneratedValue
     public Long id;
+    @Column(name = "product_name")
     public String productName;
+    @Column(name = "product_type")
     public String productType;
+    @Column(name = "product_quantity_stock")
     public Integer quantityStock;
+    @Column(name = "product_description")
     public String description;
+    @Column(name = "product_ingredients")
     public String ingredients;
+    @Column(name = "product_price")
     public Float price;
 
 
