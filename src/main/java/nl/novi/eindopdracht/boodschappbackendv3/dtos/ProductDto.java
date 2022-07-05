@@ -1,6 +1,8 @@
 package nl.novi.eindopdracht.boodschappbackendv3.dtos;
 
 
+import nl.novi.eindopdracht.boodschappbackendv3.models.Product;
+
 public class ProductDto {
 
     public Long id;
@@ -9,6 +11,25 @@ public class ProductDto {
     public String description;
     public String ingredients;
     public Float price;
+
+    public static ProductDto fromProduct(Product product) {
+
+        var dto = new ProductDto();
+
+        dto.id = product.getId();
+
+        dto.productName = product.getProductName();
+
+        dto.productType = product.getProductType();
+
+        dto.description = product.getDescription();
+
+        dto.ingredients = product.getIngredients();
+
+        dto.price = product.getPrice();
+
+        return dto;
+    }
 
 
     public Long getId() {

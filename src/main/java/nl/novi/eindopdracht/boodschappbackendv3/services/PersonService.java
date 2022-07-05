@@ -1,17 +1,14 @@
 //package nl.novi.eindopdracht.boodschappbackendv3.services;
 //
 //import nl.novi.eindopdracht.boodschappbackendv3.models.Person;
-//
-//import nl.novi.eindopdracht.boodschappbackendv3.models.User;
 //import nl.novi.eindopdracht.boodschappbackendv3.repositorys.PersonRepository;
-//
 //import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Component;
+//import org.springframework.stereotype.Service;
 //
 //import java.util.List;
 //import java.util.Optional;
-//@Component
-//public class PersonService extends User {
+//@Service
+//public class PersonService{
 //
 //    private final PersonRepository personRepository;
 //

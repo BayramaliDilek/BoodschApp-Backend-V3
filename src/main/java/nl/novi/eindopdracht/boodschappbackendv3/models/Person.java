@@ -103,4 +103,7 @@ public class Person {
         this.radius = radius;
     }
 
+    public String getEmail() {
+        return null;
+    }
 }
