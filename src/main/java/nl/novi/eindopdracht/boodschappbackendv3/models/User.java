@@ -13,6 +13,9 @@ public class User {
     private String username;
 
     @Column(nullable = false)
+    private  int id;
+
+    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
@@ -21,8 +24,11 @@ public class User {
     @Column
     private String apikey;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String email;
+
+    @OneToOne
+    Person person;
 
     @OneToMany(
             targetEntity = Authority.class,
@@ -31,9 +37,6 @@ public class User {
             orphanRemoval = true,
             fetch = FetchType.EAGER)
     private Set<Authority> authorities = new HashSet<>();
-
-    @OneToOne
-    Person person;
 
 
     public String getUsername() {
@@ -77,6 +80,15 @@ public class User {
         this.email = email;
     }
 
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
     public Set<Authority> getAuthorities() {
         return authorities;
     }
@@ -89,5 +101,11 @@ public class User {
         this.authorities.remove(authority);
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 }

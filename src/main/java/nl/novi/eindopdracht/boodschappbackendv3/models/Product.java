@@ -11,7 +11,6 @@ public class Product {
 
 
     @Id
-    @GeneratedValue
     @Column(name = "product_id")
     public Long id;
     @Column(name = "product_name")
@@ -30,6 +29,10 @@ public class Product {
     public String ingredients;
     @Column(name = "product_price")
     public Float price;
+
+
+
+
 
 
     public String getProductName() {

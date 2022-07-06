@@ -10,15 +10,15 @@ public class Person {
 
     @GeneratedValue
     @Id
-    private Long id;
-    private String firstname;
-    private String lastname;
-    private String streetName;
-    private String houseNumber;
-    private String houseNumberAdd;
-    private String city;
-    private String zipcode;
-    private String radius;
+    Long id;
+    String firstname;
+    String lastname;
+    String streetName;
+    String houseNumber;
+    String houseNumberAdd;
+    String city;
+    String zipcode;
+    String radius;
 
     @OneToOne(mappedBy = "person")
     User user;
