@@ -14,7 +14,14 @@ import java.util.Optional;
 @Service
 public interface ProductService {
 
+    List<Product> getProducts();
+
+    List<Product> findProductListByName(String productName);
+
+    List<Product> findProductListByType(String productType);
+
+
+
     Product getProduct(Long id);
 
-    List<Product> getProducts();
 }
