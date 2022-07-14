@@ -1,18 +1,15 @@
-insert into persons (id, firstname, lastname, street_name, house_number, house_number_add, city, zipcode, radius) VALUES (1001, 'Hans', 'Hanseblast', 'Admiralengracht', '202', 'C', 'Amsterdam', '1051AX', '8km');
-insert into persons (id, firstname, lastname, street_name, house_number, house_number_add, city, zipcode, radius) VALUES (1002, 'Piet', 'Goku', 'Admiralenweg', '164', 'C', 'Amsterdam', '1052AX', '10km');
-insert into persons (id, firstname, lastname, street_name, house_number, house_number_add, city, zipcode, radius) VALUES (1003, 'Harry', 'Gekk', 'Groenestraat', '63', 'C', 'Amsterdam', '1054AX', '0km');
-insert into persons (id, firstname, lastname, street_name, house_number, house_number_add, city, zipcode, radius) VALUES (1004, 'Bayla', 'Itzme', 'Graphics&Weblaan', '1992', '1', 'Amsterdam', '1100KS', '13km');
-insert into persons (id, firstname, lastname, street_name, house_number, house_number_add, city, zipcode, radius) VALUES (1005, 'Itzme', 'Creates', 'ItzmeCreatesPuntKom', '2022', 'A', 'Amsterdam', '1056GZ', '10km');
+insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode, person_radius) VALUES (1001, 'Hans', 'Hanseblast', 'Admiralengracht', '202', 'C', 'Amsterdam', '1051AX', '8km');
+insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode, person_radius) VALUES (1002, 'Piet', 'Goku', 'Admiralenweg', '164', 'C', 'Amsterdam', '1052AX', '10km');
+insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode, person_radius) VALUES (1003, 'Harry', 'Gekk', 'Groenestraat', '63', 'C', 'Amsterdam', '1054AX', '0km');
+insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode, person_radius) VALUES (1004, 'Bayla', 'Itzme', 'Graphics&Weblaan', '1992', '1', 'Amsterdam', '1100KS', '13km');
+insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode, person_radius) VALUES (1005, 'Itzme', 'Creates', 'ItzmeCreatesPuntKom', '2022', 'A', 'Amsterdam', '1056GZ', '10km');
 
-INSERT INTO users (username, id, password, email, enabled ) VALUES ('user', 1001, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica','user@test.nl', TRUE);
-INSERT INTO users (username, id, password, email, enabled ) VALUES ('admin', 1002, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'admin@test.nl', TRUE);
-INSERT INTO users (username, id, password, email, enabled ) VALUES ('bayla', 1003, 'BaylaBayla123!', 'bayla@test.nl', TRUE );
-
-INSERT INTO users (username, id, password, email, enabled, person_id) VALUES ('melmel', 1004, 'YXFcRfMFPBYzLXDD50j9', 'mel@live.nl', TRUE, 1003);
-
-INSERT INTO users (username, id, password, email, enabled, person_id) VALUES ('piet', 1005, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'piet@test.nl', TRUE, 1002);
-INSERT INTO users (username, id, password, email, enabled, person_id) VALUES ('hans', 1006, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'hans@test.nl', TRUE, 1001);
-INSERT INTO users (username, id, password, email, enabled, person_id) VALUES ('itzme', 1007, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'itzme@test.nl', TRUE, 1005);
+INSERT INTO users (username, id, password, email, enabled, person_id) VALUES ('user', 1001, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica','user@test.nl', TRUE, 1001);
+INSERT INTO users (username, id, password, email, enabled, person_id) VALUES ('admin', 1002, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'admin@test.nl', TRUE, 1002);
+INSERT INTO users (username, id, password, email, enabled, person_id) VALUES ('bayla', 1003, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'bayla@test.nl', TRUE, 1004);
+INSERT INTO users (username, id, password, email, enabled) VALUES ('piet', 1005, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'piet@test.nl', TRUE);
+INSERT INTO users (username, id, password, email, enabled) VALUES ('hans', 1006, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'hans@test.nl', TRUE);
+INSERT INTO users (username, id, password, email, enabled) VALUES ('itzme', 1007, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'itzme@test.nl', TRUE);
 
 INSERT INTO authorities (username, authority) VALUES ('user', 'ROLE_USER');
 INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_ADMIN');

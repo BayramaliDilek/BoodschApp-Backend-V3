@@ -4,6 +4,7 @@ import nl.novi.eindopdracht.boodschappbackendv3.exceptions.RecordNotFoundExcepti
 import nl.novi.eindopdracht.boodschappbackendv3.exceptions.UsernameAlreadyExistException;
 import nl.novi.eindopdracht.boodschappbackendv3.exceptions.UsernameNotFoundException;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Authority;
+import nl.novi.eindopdracht.boodschappbackendv3.models.Person;
 import nl.novi.eindopdracht.boodschappbackendv3.models.User;
 import nl.novi.eindopdracht.boodschappbackendv3.repositorys.PersonRepository;
 import nl.novi.eindopdracht.boodschappbackendv3.repositorys.UserRepository;
@@ -24,6 +25,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private PersonRepository personRepository;
+
+    @Autowired
+    private PersonServiceImpl personService;
 
     @Autowired
     private  PasswordEncoder passwordEncoder;
@@ -55,6 +59,7 @@ public class UserServiceImpl implements UserService {
         user.getAuthorities().clear();
         user.addAuthority(new Authority(user.getUsername(),"ROLE_USER"));
         user.setId((getUsers().size())+1);
+        user.setPerson(personService.savePerson(new Person()));
         User newUser = userRepository.save(user);
 
         return newUser.getUsername();

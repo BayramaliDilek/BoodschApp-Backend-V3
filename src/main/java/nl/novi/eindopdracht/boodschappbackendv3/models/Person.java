@@ -5,20 +5,19 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "persons")
 public class Person {
 
     @GeneratedValue
     @Id
     Long id;
-    String firstname;
-    String lastname;
-    String streetName;
-    String houseNumber;
-    String houseNumberAdd;
-    String city;
-    String zipcode;
-    String radius;
+    String personFirstname;
+    String personLastname;
+    String personStreetName;
+    String personHouseNumber;
+    String personHouseNumberAdd;
+    String personCity;
+    String personZipcode;
+    String personRadius;
 
     @OneToOne(mappedBy = "person")
     User user;
@@ -31,69 +30,69 @@ public class Person {
         this.id = id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getPersonFirstname() {
+        return personFirstname;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setPersonFirstname(String firstname) {
+        this.personFirstname = firstname;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getPersonLastname() {
+        return personLastname;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setPersonLastname(String lastname) {
+        this.personLastname = lastname;
     }
 
-    public String getStreetName() {
-        return streetName;
+    public String getPersonStreetName() {
+        return personStreetName;
     }
 
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
+    public void setPersonStreetName(String streetName) {
+        this.personStreetName = streetName;
     }
 
-    public String getHouseNumber() {
-        return houseNumber;
+    public String getPersonHouseNumber() {
+        return personHouseNumber;
     }
 
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
+    public void setPersonHouseNumber(String houseNumber) {
+        this.personHouseNumber = houseNumber;
     }
 
-    public String getHouseNumberAdd() {
-        return houseNumberAdd;
+    public String getPersonHouseNumberAdd() {
+        return personHouseNumberAdd;
     }
 
-    public void setHouseNumberAdd(String houseNumberAdd) {
-        this.houseNumberAdd = houseNumberAdd;
+    public void setPersonHouseNumberAdd(String houseNumberAdd) {
+        this.personHouseNumberAdd = houseNumberAdd;
     }
 
-    public String getCity() {
-        return city;
+    public String getPersonCity() {
+        return personCity;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setPersonCity(String city) {
+        this.personCity = city;
     }
 
-    public String getZipcode() {
-        return zipcode;
+    public String getPersonZipcode() {
+        return personZipcode;
     }
 
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
+    public void setPersonZipcode(String zipcode) {
+        this.personZipcode = zipcode;
     }
 
 
-    public String getRadius() {
-        return radius;
+    public String getPersonRadius() {
+        return personRadius;
     }
 
-    public void setRadius(String radius) {
-        this.radius = radius;
+    public void setPersonRadius(String radius) {
+        this.personRadius = radius;
     }
 
     public String getEmail() {
