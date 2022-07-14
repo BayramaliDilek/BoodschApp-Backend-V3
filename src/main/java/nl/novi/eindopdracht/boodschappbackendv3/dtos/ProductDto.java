@@ -1,6 +1,8 @@
 package nl.novi.eindopdracht.boodschappbackendv3.dtos;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import nl.novi.eindopdracht.boodschappbackendv3.models.FileUploadResponse;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Product;
 
 public class ProductDto {
@@ -11,6 +13,8 @@ public class ProductDto {
     public String description;
     public String ingredients;
     public Float price;
+    @JsonSerialize
+    FileUploadResponse image;
 
     public static ProductDto fromProduct(Product product) {
 
@@ -27,6 +31,8 @@ public class ProductDto {
         dto.ingredients = product.getIngredients();
 
         dto.price = product.getPrice();
+
+        dto.image = product.getFile();
 
         return dto;
     }
@@ -78,5 +84,13 @@ public class ProductDto {
 
     public void setPrice(Float price) {
         this.price = price;
+    }
+
+    public FileUploadResponse getImage() {
+        return image;
+    }
+
+    public void setImage(FileUploadResponse image) {
+        this.image = image;
     }
 }
