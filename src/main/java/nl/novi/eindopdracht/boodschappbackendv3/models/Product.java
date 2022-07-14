@@ -30,6 +30,8 @@ public class Product {
     @Column(name = "product_price")
     public Float price;
 
+    @OneToOne
+    FileUploadResponse file;
 
 
 
@@ -54,6 +56,15 @@ public class Product {
     public Float getPrice() {
         return price;
     }
+
+    public FileUploadResponse getFile() {
+        return file;
+    }
+
+    public void setFile(FileUploadResponse file) {
+        this.file = file;
+    }
+
 
 }
 

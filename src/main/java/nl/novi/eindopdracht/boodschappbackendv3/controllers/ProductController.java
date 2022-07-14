@@ -2,11 +2,14 @@ package nl.novi.eindopdracht.boodschappbackendv3.controllers;
 
 
 import nl.novi.eindopdracht.boodschappbackendv3.dtos.ProductDto;
+import nl.novi.eindopdracht.boodschappbackendv3.dtos.ProductInputDto;
+import nl.novi.eindopdracht.boodschappbackendv3.models.FileUploadResponse;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Product;
 import nl.novi.eindopdracht.boodschappbackendv3.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +22,17 @@ public class ProductController {
 
     private final ProductService productService;
 
+    private final PhotoController photoController;
+
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, PhotoController photoController) {
         this.productService = productService;
+        this.photoController = photoController;
     }
 
-    @Transactional
+
     @GetMapping
+    @Transactional
     public List<ProductDto> getProducts(@RequestParam(value = "productName", required = false, defaultValue = "")String productName,
                                         @RequestParam(value = "productType", required = false, defaultValue = "")String productType) {
 
@@ -58,6 +65,36 @@ public class ProductController {
 
         return ProductDto.fromProduct(product);
     }
+
+    @PostMapping
+    public ProductDto saveProduct(@RequestBody ProductInputDto dto){
+        var product = productService.saveProduct(dto.toProduct());
+
+        return ProductDto.fromProduct(product);
+    }
+
+    @PutMapping("/{id}")
+    public ProductDto updateProduct(@PathVariable Long id,
+                                    @RequestBody Product product) {
+        productService.updateProduct(product);
+
+        return ProductDto.fromProduct(product);
+    }
+
+    @DeleteMapping(path = "{id}")
+    public void deleteProduct(
+            @PathVariable("id") String productName) {
+        productService.deleteProduct(productName);
+    }
+
+    @PostMapping("/{id}/picture")
+    public void assignPictureToProduct(@PathVariable("id") Long id,
+                                       @RequestBody MultipartFile file){
+        FileUploadResponse picture = photoController.singleFileUpload(file);
+
+        productService.assignPictureToProduct(picture.getFileName(), id);
+    }
+
 
 
 }
