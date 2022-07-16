@@ -1,8 +1,9 @@
 package nl.novi.eindopdracht.boodschappbackendv3.controllers;
 
 
-import nl.novi.eindopdracht.boodschappbackendv3.dtos.ProductDto;
-import nl.novi.eindopdracht.boodschappbackendv3.dtos.ProductInputDto;
+import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.IdInputDto;
+import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.ProductDto;
+import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.ProductInputDto;
 import nl.novi.eindopdracht.boodschappbackendv3.models.FileUploadResponse;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Product;
 import nl.novi.eindopdracht.boodschappbackendv3.services.ProductService;
@@ -66,9 +67,9 @@ public class ProductController {
         return ProductDto.fromProduct(product);
     }
 
-    @PostMapping
-    public ProductDto saveProduct(@RequestBody ProductInputDto dto){
-        var product = productService.saveProduct(dto.toProduct());
+    @PostMapping("/create")
+    public ProductDto createProduct(@RequestBody ProductInputDto dto){
+        var product = productService.createProduct(dto.toProduct());
 
         return ProductDto.fromProduct(product);
     }
@@ -87,14 +88,20 @@ public class ProductController {
         productService.deleteProduct(productName);
     }
 
-    @PostMapping("/{id}/picture")
-    public void assignPictureToProduct(@PathVariable("id") Long id,
-                                       @RequestBody MultipartFile file){
-        FileUploadResponse picture = photoController.singleFileUpload(file);
+    @PutMapping("product/{id}/picture/{fileName}")
+    public void assignPictureToProduct(@PathVariable("id") Long productId,
+                                       @PathVariable("fileName") String fileName){
 
-        productService.assignPictureToProduct(picture.getFileName(), id);
+        productService.assignPictureToProduct(fileName, productId);
     }
 
+    @PutMapping("/{id}/picture")
+    public void uploadPictureToProduct(@PathVariable("id") Long productId,
+                                       @RequestBody MultipartFile file){
+
+        FileUploadResponse photo = photoController.singleFileUpload(file);
+        productService.assignPictureToProduct(file.getOriginalFilename(), productId);
+    }
 
 
 }

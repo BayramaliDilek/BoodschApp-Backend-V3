@@ -1,4 +1,4 @@
-package nl.novi.eindopdracht.boodschappbackendv3.dtos;
+package nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos;
 
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

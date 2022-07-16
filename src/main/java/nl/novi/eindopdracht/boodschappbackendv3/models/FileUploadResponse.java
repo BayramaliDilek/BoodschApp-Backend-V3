@@ -3,19 +3,24 @@ package nl.novi.eindopdracht.boodschappbackendv3.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "pictures")
+@Table(name = "picture")
 public class FileUploadResponse {
-    @Id
-    Long id;
+//    Long id;
 
+    @Id
     String fileName;
 
     String contentType;
 
     String url;
 
-//    @OneToOne(mappedBy = "image")
-//    Product product;
+//    @Lob
+//    byte[] data;
+
+
+    @OneToOne(mappedBy = "picture")
+    Product product;
+
 
     public FileUploadResponse(String fileName, String contentType, String url) {
         this.fileName = fileName;
@@ -23,16 +28,12 @@ public class FileUploadResponse {
         this.url = url;
     }
 
-    public FileUploadResponse(String fileName, String contentType, String url, Product product) {
-        this.fileName = fileName;
-        this.contentType = contentType;
-        this.url = url;
-//        this.product = product;
-    }
-
     public FileUploadResponse() {
     }
 
+//    public Long getId() {
+//        return id;
+//    }
 
     public String getFileName() {
         return fileName;
@@ -46,9 +47,13 @@ public class FileUploadResponse {
         return url;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    public byte[] getData() {
+//        return data;
+//    }
+
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public void setFileName(String fileName) {
         this.fileName = fileName;

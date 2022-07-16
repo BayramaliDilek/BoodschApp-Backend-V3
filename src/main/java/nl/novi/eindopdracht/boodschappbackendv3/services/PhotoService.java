@@ -17,16 +17,24 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 @Service
 public class PhotoService {
-    @Value("/Users/itzmeBAYLA/IdeaProjects/BoodschApp-Backend-V3/uploads")
+    @Value("C:\\Users\\itzmeBAYLA\\IdeaProjects\\BoodschApp-Backend-V3\\uploads")
     private Path fileStoragePath;
     private final String fileStorageLocation;
 
     private final FileUploadRepository fileUploadRepository;
 
-    public PhotoService(@Value("/Users/itzmeBAYLA/IdeaProjects/BoodschApp-Backend-V3/uploads") String fileStorageLocation, FileUploadRepository fileUploadRepository) {
+
+
+//    public Stream<FileUploadResponse> getPictures() {
+//        return fileUploadRepository.findAll().stream();
+//    }
+
+
+    public PhotoService(@Value("C:\\Users\\itzmeBAYLA\\IdeaProjects\\BoodschApp-Backend-V3\\uploads") String fileStorageLocation, FileUploadRepository fileUploadRepository) {
         fileStoragePath = Paths.get(fileStorageLocation).toAbsolutePath().normalize();
 
         this.fileStorageLocation = fileStorageLocation;

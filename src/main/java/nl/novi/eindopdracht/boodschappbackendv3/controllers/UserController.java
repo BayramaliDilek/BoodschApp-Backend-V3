@@ -88,7 +88,8 @@ public class UserController {
 
 
     @PutMapping("/{username}/{personId}")
-    public void assignPersonToUser(@PathVariable("username") String username, @PathVariable("personId") Long personId) {
+    public void assignPersonToUser(@PathVariable("username") String username,
+                                   @PathVariable("personId") Long personId) {
 
         userService.assignPersonToUser(personId, username);
 
