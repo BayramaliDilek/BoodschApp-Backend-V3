@@ -31,11 +31,12 @@ public class Product {
     public Float price;
 
     @OneToOne
-    FileUploadResponse file;
+    FileUploadResponse picture;
 
 
-
-
+    public Long getId() {
+        return id;
+    }
 
     public String getProductName() {
         return productName;
@@ -57,14 +58,36 @@ public class Product {
         return price;
     }
 
-    public FileUploadResponse getFile() {
-        return file;
+    public FileUploadResponse getPicture() {
+        return picture;
     }
 
-    public void setFile(FileUploadResponse file) {
-        this.file = file;
+    public void setPicture(FileUploadResponse picture) {
+        this.picture = picture;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
 }
 

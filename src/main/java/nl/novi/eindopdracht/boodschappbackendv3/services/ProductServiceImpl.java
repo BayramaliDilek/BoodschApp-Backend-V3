@@ -1,11 +1,13 @@
 package nl.novi.eindopdracht.boodschappbackendv3.services;
 
 import nl.novi.eindopdracht.boodschappbackendv3.exceptions.RecordNotFoundException;
+import nl.novi.eindopdracht.boodschappbackendv3.models.FileUploadResponse;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Product;
 import nl.novi.eindopdracht.boodschappbackendv3.repositorys.FileUploadRepository;
 import nl.novi.eindopdracht.boodschappbackendv3.repositorys.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,8 +15,12 @@ import java.util.Optional;
 @Service
 public class ProductServiceImpl implements ProductService {
 
+    @Autowired
     private final ProductRepository productRepository;
 
+    @Autowired
+    private PhotoService photoService;
+    @Autowired
     private final FileUploadRepository fileUploadRepository;
 
 
@@ -65,8 +71,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product saveProduct(Product product) {
+    public Product createProduct(Product product) {
+
+        product.setId(product.getId());
+        product.setProductName(product.getProductName());
+        product.setProductType(product.getProductType());
+        product.setDescription(product.getDescription());
+        product.setIngredients(product.getIngredients());
+        product.setPrice(product.getPrice());
+
         return productRepository.save(product);
+
+
     }
 
     @Override
@@ -85,10 +101,10 @@ public class ProductServiceImpl implements ProductService {
             product1.setDescription(product.getDescription());
             product1.setIngredients(product.getIngredients());
             product1.setPrice(product.getPrice());
+            product1.setPicture(product.getPicture());
 
             productRepository.save(product1);
 
-//            product1.setFileUploadResponse(prod);
 
         }
     }
@@ -100,11 +116,11 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public void assignPictureToProduct(String Filename, Long id) {
+    public void assignPictureToProduct(String fileName, Long id) {
 
         var optionalProduct = productRepository.findById(id);
 
-        var optionalPicture = fileUploadRepository.findById(Filename);
+        var optionalPicture = fileUploadRepository.findById(fileName);
 
         if (optionalProduct.isPresent() && optionalPicture.isPresent()) {
 
@@ -112,7 +128,7 @@ public class ProductServiceImpl implements ProductService {
 
             var picture = optionalPicture.get();
 
-            product.setFile(picture);
+            product.setPicture(picture);
 
             productRepository.save(product);
 

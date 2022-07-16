@@ -1,6 +1,6 @@
-package nl.novi.eindopdracht.boodschappbackendv3.dtos;
+package nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos;
 
-import nl.novi.eindopdracht.boodschappbackendv3.models.FileUploadResponse;
+//import nl.novi.eindopdracht.boodschappbackendv3.models.FileUploadResponse;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Product;
 
 
@@ -18,7 +18,7 @@ public class ProductInputDto {
 
     public Float price;
 
-    public FileUploadResponse image;
+//    public FileUploadResponse image;
 
     public Product toProduct() {
 
@@ -30,9 +30,11 @@ public class ProductInputDto {
         product.setDescription(description);
         product.setIngredients(ingredients);
         product.setPrice(price);
-        product.setFile(image);
+
 
         return product;
     }
 
 }
+
+//product.setPicture(image);
