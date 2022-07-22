@@ -3,6 +3,7 @@ package nl.novi.eindopdracht.boodschappbackendv3.services;
 
 import nl.novi.eindopdracht.boodschappbackendv3.models.Authority;
 import nl.novi.eindopdracht.boodschappbackendv3.models.User;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.util.*;
@@ -30,6 +31,7 @@ public interface UserService {
 
     void assignPersonToUser(Long id, String username);
 
+    void assignPictureToUser(String fileName, String username);
 
 
 }

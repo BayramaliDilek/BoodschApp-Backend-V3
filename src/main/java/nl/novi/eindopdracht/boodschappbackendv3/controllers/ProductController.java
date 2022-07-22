@@ -1,10 +1,8 @@
 package nl.novi.eindopdracht.boodschappbackendv3.controllers;
 
 
-import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.IdInputDto;
 import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.ProductDto;
 import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.ProductInputDto;
-import nl.novi.eindopdracht.boodschappbackendv3.models.FileUploadResponse;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Product;
 import nl.novi.eindopdracht.boodschappbackendv3.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +86,7 @@ public class ProductController {
         productService.deleteProduct(productName);
     }
 
+
     @PutMapping("product/{id}/picture/{fileName}")
     public void assignPictureToProduct(@PathVariable("id") Long productId,
                                        @PathVariable("fileName") String fileName){
@@ -99,9 +98,8 @@ public class ProductController {
     public void uploadPictureToProduct(@PathVariable("id") Long productId,
                                        @RequestBody MultipartFile file){
 
-        FileUploadResponse photo = photoController.singleFileUpload(file);
+        photoController.singleFileUpload(file);
         productService.assignPictureToProduct(file.getOriginalFilename(), productId);
     }
-
 
 }

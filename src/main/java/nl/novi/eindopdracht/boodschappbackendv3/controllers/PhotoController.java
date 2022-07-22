@@ -30,36 +30,12 @@ public class PhotoController {
     }
 
 
-//    @GetMapping
-//    public ResponseEntity<List<ResponseFile>> getPictures() {
-//
-//        List<ResponseFile> files = service.getPictures().map(picture -> {
-//
-//            String fileDownloadUri = ServletUriComponentsBuilder
-//                    .fromCurrentContextPath()
-//                    .path("/pictures/")
-//                    .path(String.valueOf(picture.getId()))
-//                    .toUriString();
-//
-//            return new ResponseFile(
-//                    picture.getFileName(),
-//                    fileDownloadUri,
-//                    picture.getContentType(),
-//                    picture.getData().length);
-//        }).collect(Collectors.toList());
-//
-//        return ResponseEntity.status(HttpStatus.OK).body(files);
-//
-//    }
-
-
-
     //    post for single upload
     @PostMapping("/upload")
     FileUploadResponse singleFileUpload(@RequestParam("file") MultipartFile file){
 
-        // next line makes url. example "http://localhost:8080/download/naam.jpg"
-        String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/download/").path(Objects.requireNonNull(file.getOriginalFilename())).toUriString();
+        // next line makes url. example "http://localhost:8080/uploads/naam.jpg"
+        String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/uploads/").path(Objects.requireNonNull(file.getOriginalFilename())).toUriString();
 
         String contentType = file.getContentType();
 
@@ -67,6 +43,7 @@ public class PhotoController {
 
         return new FileUploadResponse(fileName, contentType, url );
     }
+
 
     //    get for single download
     @GetMapping("/download/{fileName}")

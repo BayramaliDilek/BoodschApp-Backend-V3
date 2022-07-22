@@ -8,10 +8,6 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public interface FileUploadRepository extends JpaRepository<FileUploadResponse, String> {
+    Optional<FileUploadResponse> findByFileName(String fileName);
 
-//    FileUploadResponse findByNameEquals(String fileName);
-
-    Optional<FileUploadResponse> findByFileNameEqualsIgnoreCase(String fileName);
-
-//    Stream<FileUploadResponse> getPictures();
 }
