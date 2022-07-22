@@ -31,7 +31,6 @@ public class ProductInputDto {
         product.setIngredients(ingredients);
         product.setPrice(price);
 
-
         return product;
     }
 

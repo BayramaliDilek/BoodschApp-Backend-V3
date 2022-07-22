@@ -8,13 +8,14 @@ import java.util.Set;
 @Table(name = "users")
 public class User {
 
+
     @Id
     @Column(nullable = false,
             unique = true)
     private String username;
 
     @Column(nullable = false)
-    private  int id;
+    private  Long id;
 
     @Column(nullable = false)
     private String password;
@@ -31,6 +32,9 @@ public class User {
     @OneToOne
     Person person;
 
+    @OneToOne
+    FileUploadResponse picture;
+
     @OneToMany(
             targetEntity = Authority.class,
             mappedBy = "username",
@@ -38,6 +42,8 @@ public class User {
             orphanRemoval = true,
             fetch = FetchType.EAGER)
     private Set<Authority> authorities = new HashSet<>();
+
+
 
 
     public String getUsername() {
@@ -102,11 +108,19 @@ public class User {
         this.authorities.remove(authority);
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public FileUploadResponse getPicture() {
+        return picture;
+    }
+
+    public void setPicture(FileUploadResponse picture) {
+        this.picture = picture;
     }
 }

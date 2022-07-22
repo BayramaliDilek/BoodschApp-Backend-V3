@@ -24,7 +24,7 @@ public interface ProductService {
 
     void deleteProduct(String productName);
 
-    void assignPictureToProduct(String fileName, Long pictureId);
+    void assignPictureToProduct(String fileName, Long id);
 
 
 }

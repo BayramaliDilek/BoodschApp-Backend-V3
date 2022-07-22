@@ -79,6 +79,7 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(product.getDescription());
         product.setIngredients(product.getIngredients());
         product.setPrice(product.getPrice());
+        product.setQuantity(product.getQuantity());
 
         return productRepository.save(product);
 
@@ -101,6 +102,7 @@ public class ProductServiceImpl implements ProductService {
             product1.setDescription(product.getDescription());
             product1.setIngredients(product.getIngredients());
             product1.setPrice(product.getPrice());
+            product1.setQuantity(product.getQuantity());
             product1.setPicture(product.getPicture());
 
             productRepository.save(product1);
@@ -120,7 +122,7 @@ public class ProductServiceImpl implements ProductService {
 
         var optionalProduct = productRepository.findById(id);
 
-        var optionalPicture = fileUploadRepository.findById(fileName);
+        var optionalPicture = fileUploadRepository.findByFileName(fileName);
 
         if (optionalProduct.isPresent() && optionalPicture.isPresent()) {
 

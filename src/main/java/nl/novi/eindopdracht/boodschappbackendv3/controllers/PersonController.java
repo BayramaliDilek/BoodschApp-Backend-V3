@@ -80,15 +80,4 @@ public class PersonController {
         personService.deletePerson(personId);
     }
 
-
-
-
-
-
-
-
-
-
-
-
 }

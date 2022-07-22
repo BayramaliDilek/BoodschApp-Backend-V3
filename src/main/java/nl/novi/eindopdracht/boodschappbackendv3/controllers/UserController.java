@@ -1,13 +1,16 @@
 package nl.novi.eindopdracht.boodschappbackendv3.controllers;
 
 
-
+import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.UserDto;
 import nl.novi.eindopdracht.boodschappbackendv3.exceptions.BadRequestException;
+import nl.novi.eindopdracht.boodschappbackendv3.models.FileUploadResponse;
 import nl.novi.eindopdracht.boodschappbackendv3.models.User;
 import nl.novi.eindopdracht.boodschappbackendv3.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -18,8 +21,17 @@ import java.util.Map;
 @RequestMapping(value = "/users")
 public class UserController {
 
+
+    private final UserService userService;
+
+    private final PhotoController photoController;
+
     @Autowired
-    private UserService userService;
+    public UserController(UserService userService, PhotoController photoController) {
+        this.userService = userService;
+        this.photoController = photoController;
+    }
+
 
     @GetMapping("/all")
     public ResponseEntity<Object> getUsers() {
@@ -45,12 +57,14 @@ public class UserController {
     }
 
     @PutMapping(value = "/{username}")
-    public ResponseEntity<Object> updateUser(@PathVariable("username") String username, @RequestBody User user) {
+    public ResponseEntity<Object> updateUser(@PathVariable("username") String username,
+                                             @RequestBody User user) {
 
         userService.updateUser(username, user);
 
         return ResponseEntity.noContent().build();
     }
+
 
     @DeleteMapping(value = "/{username}")
     public ResponseEntity<Object> deleteUser(@PathVariable("username") String username) {
@@ -72,8 +86,7 @@ public class UserController {
             String authorityName = (String) fields.get("authority");
             userService.addAuthority(username, authorityName);
             return ResponseEntity.noContent().build();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             throw new BadRequestException();
         }
     }
@@ -95,5 +108,21 @@ public class UserController {
 
     }
 
+
+    @PutMapping("/{username}/picture/{fileName}")
+    public void assignPictureToUser(@PathVariable("username") String username,
+                                    @PathVariable("fileName") String fileName) {
+
+        userService.assignPictureToUser(fileName, username);
+    }
+
+
+    @PutMapping("/{username}/picture")
+    public void uploadPictureToUser(@PathVariable("username") String username,
+                                    @RequestBody MultipartFile file) {
+
+        photoController.singleFileUpload(file);
+        userService.assignPictureToUser(file.getOriginalFilename(), username);
+    }
 
 }

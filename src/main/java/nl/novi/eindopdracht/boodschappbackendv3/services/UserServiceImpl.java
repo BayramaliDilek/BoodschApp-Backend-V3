@@ -4,14 +4,18 @@ import nl.novi.eindopdracht.boodschappbackendv3.exceptions.RecordNotFoundExcepti
 import nl.novi.eindopdracht.boodschappbackendv3.exceptions.UsernameAlreadyExistException;
 import nl.novi.eindopdracht.boodschappbackendv3.exceptions.UsernameNotFoundException;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Authority;
+import nl.novi.eindopdracht.boodschappbackendv3.models.FileUploadResponse;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Person;
 import nl.novi.eindopdracht.boodschappbackendv3.models.User;
+import nl.novi.eindopdracht.boodschappbackendv3.repositorys.FileUploadRepository;
 import nl.novi.eindopdracht.boodschappbackendv3.repositorys.PersonRepository;
 import nl.novi.eindopdracht.boodschappbackendv3.repositorys.UserRepository;
 import nl.novi.eindopdracht.boodschappbackendv3.utils.RandomStringGenerator;
+import org.apache.tomcat.util.http.fileupload.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -24,13 +28,19 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
+    private FileUploadRepository fileUploadRepository;
+
+    @Autowired
     private PersonRepository personRepository;
 
     @Autowired
     private PersonServiceImpl personService;
 
     @Autowired
-    private  PasswordEncoder passwordEncoder;
+    private PhotoService photoService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public Collection<User> getUsers() {
@@ -57,8 +67,8 @@ public class UserServiceImpl implements UserService {
         user.setApikey(randomString);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.getAuthorities().clear();
-        user.addAuthority(new Authority(user.getUsername(),"ROLE_USER"));
-        user.setId((getUsers().size())+1);
+        user.addAuthority(new Authority(user.getUsername(), "ROLE_USER"));
+        user.setId((long) ((getUsers().size()) + 1));
 
         user.setPerson(personService.savePerson(new Person()));
 
@@ -67,16 +77,23 @@ public class UserServiceImpl implements UserService {
         return newUser.getUsername();
 
     }
+
     @Override
     public void deleteUser(String username) {
         userRepository.deleteById(username);
     }
 
-    public void updateUser(String username, User newUser){
+    @Override
+    public void updateUser(String username, User user) {
         if (!userRepository.existsById(username)) throw new RecordNotFoundException();
-        User user = userRepository.findById(username).get();
-        user.setPassword(newUser.getPassword());
-        userRepository.save(user);
+        User user1 = userRepository.findById(username).get();
+
+
+        user1.setPassword(user.getPassword());
+        user1.setUsername(user.getUsername());
+        user1.setPicture(user.getPicture());
+
+        userRepository.save(user1);
 
     }
 
@@ -91,6 +108,7 @@ public class UserServiceImpl implements UserService {
         if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
         User user = userRepository.findById(username).get();
         user.addAuthority(new Authority(username, authority));
+
         userRepository.save(user);
     }
 
@@ -115,13 +133,25 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    public void assignPictureToUser(String fileName, String username) {
+
+        var optionalUser = userRepository.findById(username);
+        var optionalPicture = fileUploadRepository.findByFileName(fileName);
+
+        if (optionalPicture.isPresent() && optionalUser.isPresent()) {
+            var user = optionalUser.get();
+            var picture = optionalPicture.get();
+
+            user.setPicture(picture);
+            userRepository.save(user);
+
+        } else {
+            throw new RecordNotFoundException("een van de twee is niet gevonden");
+
+        }
 
 
-
-
-
-
-
+    }
 
 
 }

@@ -21,6 +21,9 @@ public class FileUploadResponse {
     @OneToOne(mappedBy = "picture")
     Product product;
 
+    @OneToOne(mappedBy = "picture")
+    User user;
+
 
     public FileUploadResponse(String fileName, String contentType, String url) {
         this.fileName = fileName;
