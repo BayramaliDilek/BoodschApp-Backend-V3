@@ -1,18 +1,32 @@
 package nl.novi.eindopdracht.boodschappbackendv3.models;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
 public class DeliveryRequest {
 
-    private Long id;
-    private Product product;
-    private Integer quantity;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long id;
+    @OneToMany(mappedBy = "productList")
+    public List<Product> productList;
+
+    public Status status;
+
+    @ManyToOne
+    public User applier;
+
+    @ManyToOne
+    public User deliverer;
 
     public DeliveryRequest() {
     }
 
-    public DeliveryRequest(Long id, Product product, Integer quantity) {
-        this.id = id;
-        this.product = product;
-        this.quantity = quantity;
+    public DeliveryRequest(List<Product> productList, User applier) {
+        this.productList = productList;
+        this.status = Status.PENDING;
+        this.applier = applier;
     }
 
 
@@ -24,19 +38,37 @@ public class DeliveryRequest {
         this.id = id;
     }
 
-    public Product getProduct() {
-        return product;
+    public List<Product> getProductList() {
+        return productList;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public User getApplier() {
+        return applier;
+    }
+
+    public void setApplier(User applier) {
+        this.applier = applier;
+    }
+
+    public User getDeliverer() {
+        return deliverer;
+    }
+
+    public void setDeliverer(User deliverer) {
+        this.deliverer = deliverer;
     }
 }
+
+

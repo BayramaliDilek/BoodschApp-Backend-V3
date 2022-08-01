@@ -7,20 +7,21 @@ import nl.novi.eindopdracht.boodschappbackendv3.repositorys.FileUploadRepository
 import nl.novi.eindopdracht.boodschappbackendv3.repositorys.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
+
     private final ProductRepository productRepository;
 
-    @Autowired
     private PhotoService photoService;
-    @Autowired
+
     private final FileUploadRepository fileUploadRepository;
 
 
@@ -82,8 +83,6 @@ public class ProductServiceImpl implements ProductService {
         product.setQuantity(product.getQuantity());
 
         return productRepository.save(product);
-
-
     }
 
     @Override
@@ -103,7 +102,6 @@ public class ProductServiceImpl implements ProductService {
             product1.setIngredients(product.getIngredients());
             product1.setPrice(product.getPrice());
             product1.setQuantity(product.getQuantity());
-            product1.setPicture(product.getPicture());
 
             productRepository.save(product1);
 

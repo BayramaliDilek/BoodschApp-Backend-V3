@@ -1,14 +1,12 @@
 package nl.novi.eindopdracht.boodschappbackendv3.controllers;
 
 
-import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.UserDto;
 import nl.novi.eindopdracht.boodschappbackendv3.exceptions.BadRequestException;
-import nl.novi.eindopdracht.boodschappbackendv3.models.FileUploadResponse;
 import nl.novi.eindopdracht.boodschappbackendv3.models.User;
+import nl.novi.eindopdracht.boodschappbackendv3.services.PersonService;
 import nl.novi.eindopdracht.boodschappbackendv3.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -26,15 +24,21 @@ public class UserController {
 
     private final PhotoController photoController;
 
+    private final PersonService personService;
+
     @Autowired
-    public UserController(UserService userService, PhotoController photoController) {
+    public UserController(UserService userService, PhotoController photoController, PersonService personService) {
         this.userService = userService;
         this.photoController = photoController;
+        this.personService = personService;
     }
 
 
     @GetMapping("/all")
     public ResponseEntity<Object> getUsers() {
+
+
+//        ResponseEntity.ok().body(personService.getPersonList());
 
         return ResponseEntity.ok().body(userService.getUsers());
     }
@@ -66,7 +70,7 @@ public class UserController {
     }
 
 
-    @DeleteMapping(value = "/{username}")
+    @DeleteMapping(value = "/delete/{username}")
     public ResponseEntity<Object> deleteUser(@PathVariable("username") String username) {
 
         userService.deleteUser(username);

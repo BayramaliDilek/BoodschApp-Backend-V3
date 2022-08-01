@@ -101,5 +101,4 @@ public class ProductController {
         photoController.singleFileUpload(file);
         productService.assignPictureToProduct(file.getOriginalFilename(), productId);
     }
-
 }

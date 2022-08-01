@@ -31,11 +31,11 @@ public class PhotoController {
 
 
     //    post for single upload
-    @PostMapping("/upload")
+    @PutMapping("/upload")
     FileUploadResponse singleFileUpload(@RequestParam("file") MultipartFile file){
 
         // next line makes url. example "http://localhost:8080/uploads/naam.jpg"
-        String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/uploads/").path(Objects.requireNonNull(file.getOriginalFilename())).toUriString();
+        String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/pictures/download/").path(Objects.requireNonNull(file.getOriginalFilename())).toUriString();
 
         String contentType = file.getContentType();
 
@@ -67,5 +67,15 @@ public class PhotoController {
 //        for showing image in browser
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(mimeType)).header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + resource.getFilename()).body(resource);
     }
+
+
+    @DeleteMapping("/delete/")
+    ResponseEntity<Objects> deletePicture(@PathVariable String fileName){
+        service.deletePicture(fileName);
+
+        return ResponseEntity.noContent().build();
+    }
+
+
 
 }

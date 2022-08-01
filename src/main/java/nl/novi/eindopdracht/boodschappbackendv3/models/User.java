@@ -2,6 +2,7 @@ package nl.novi.eindopdracht.boodschappbackendv3.models;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -44,6 +45,13 @@ public class User {
     private Set<Authority> authorities = new HashSet<>();
 
 
+    @OneToMany(
+            mappedBy = "applier")
+    private List<DeliveryRequest> applier;
+
+
+    @OneToMany(mappedBy = "deliverer")
+    private List<DeliveryRequest> deliverer;
 
 
     public String getUsername() {
@@ -122,5 +130,21 @@ public class User {
 
     public void setPicture(FileUploadResponse picture) {
         this.picture = picture;
+    }
+
+    public List<DeliveryRequest> getApplier() {
+        return applier;
+    }
+
+    public void setApplier(List<DeliveryRequest> applier) {
+        this.applier = applier;
+    }
+
+    public List<DeliveryRequest> getDeliverer() {
+        return deliverer;
+    }
+
+    public void setDeliverer(List<DeliveryRequest> deliverer) {
+        this.deliverer = deliverer;
     }
 }

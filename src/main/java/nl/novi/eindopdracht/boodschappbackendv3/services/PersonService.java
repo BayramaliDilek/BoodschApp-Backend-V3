@@ -2,6 +2,7 @@ package nl.novi.eindopdracht.boodschappbackendv3.services;
 
 import nl.novi.eindopdracht.boodschappbackendv3.models.Person;
 
+import java.util.Collection;
 import java.util.List;
 
 

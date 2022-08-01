@@ -15,6 +15,7 @@ public class PersonDto {
     public String personRadius;
 
 
+
     public static PersonDto fromPerson(Person person) {
         if (person == null) return null;
 

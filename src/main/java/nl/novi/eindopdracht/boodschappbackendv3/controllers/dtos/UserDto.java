@@ -4,8 +4,10 @@ package nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Authority;
 import nl.novi.eindopdracht.boodschappbackendv3.models.FileUploadResponse;
+import nl.novi.eindopdracht.boodschappbackendv3.models.Person;
 import nl.novi.eindopdracht.boodschappbackendv3.models.User;
 
+import javax.persistence.OneToOne;
 import java.util.Set;
 
 public class UserDto {
@@ -15,6 +17,9 @@ public class UserDto {
     public String apikey;
     public String email;
     public Boolean enabled;
+
+    @JsonSerialize
+    Person person;
 
     @JsonSerialize
     public Set<Authority> authorities;
@@ -91,5 +96,13 @@ public class UserDto {
 
     public void setPicture(FileUploadResponse picture) {
         this.picture = picture;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 }
