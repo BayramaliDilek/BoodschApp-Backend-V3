@@ -1,8 +1,10 @@
 package nl.novi.eindopdracht.boodschappbackendv3.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -11,6 +13,7 @@ public class Product {
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "product_id")
     public Long id;
     @Column(name = "product_name")
@@ -35,6 +38,9 @@ public class Product {
 
     @OneToOne
     FileUploadResponse picture;
+
+    @ManyToOne
+    private DeliveryRequest productList;
 
 
     public Long getId() {
@@ -99,6 +105,14 @@ public class Product {
 
     public void setQuantity(Float quantity) {
         this.quantity = quantity;
+    }
+
+    public DeliveryRequest getProductList() {
+        return productList;
+    }
+
+    public void setProductList(DeliveryRequest productList) {
+        this.productList = productList;
     }
 }
 

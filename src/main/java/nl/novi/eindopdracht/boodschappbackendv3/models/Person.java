@@ -2,6 +2,7 @@ package nl.novi.eindopdracht.boodschappbackendv3.models;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -21,6 +22,9 @@ public class Person {
 
     @OneToOne(mappedBy = "person")
     User user;
+
+
+
 
     public Long getId() {
         return id;
@@ -98,4 +102,6 @@ public class Person {
     public String getEmail() {
         return null;
     }
+
+
 }

@@ -28,11 +28,6 @@ public class PhotoService {
 
 
 
-//    public Stream<FileUploadResponse> getPictures() {
-//        return fileUploadRepository.findAll().stream();
-//    }
-
-
     public PhotoService(@Value("C:\\Users\\itzmeBAYLA\\IdeaProjects\\BoodschApp-Backend-V3\\uploads") String fileStorageLocation, FileUploadRepository fileUploadRepository) {
         fileStoragePath = Paths.get(fileStorageLocation).toAbsolutePath().normalize();
 
@@ -84,6 +79,14 @@ public class PhotoService {
             throw new RuntimeException("the file doesn't exist or not readable");
         }
     }
+
+
+    public void deletePicture(String fileName) {
+        fileUploadRepository.deleteById(fileName);
+
+    }
+
+
 
 }
 

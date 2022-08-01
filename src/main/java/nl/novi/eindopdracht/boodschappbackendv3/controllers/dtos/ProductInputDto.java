@@ -18,6 +18,8 @@ public class ProductInputDto {
 
     public Float price;
 
+    public Float quantity;
+
 //    public FileUploadResponse image;
 
     public Product toProduct() {
@@ -30,6 +32,7 @@ public class ProductInputDto {
         product.setDescription(description);
         product.setIngredients(ingredients);
         product.setPrice(price);
+        product.setQuantity(quantity);
 
         return product;
     }

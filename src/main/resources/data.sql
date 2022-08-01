@@ -18,6 +18,7 @@ INSERT INTO picture ( file_name, content_type, url) VALUES ('starbucksIjskoffie.
 INSERT INTO picture ( file_name, content_type, url) VALUES ('stokbrood.jpg', 'image/jpeg', 'http://localhost:8080/pictures/download/stokbrood.jpg');
 INSERT INTO picture ( file_name, content_type, url) VALUES ('Krokantschnitzel.jpg', 'image/jpeg', 'http://localhost:8080/pictures/download/Krokantschnitzel.jpg');
 INSERT INTO picture ( file_name, content_type, url) VALUES ('frambozen.jpg', 'image/jpeg', 'http://localhost:8080/pictures/download/frambozen.jpg');
+INSERT INTO picture ( file_name, content_type, url) VALUES ('ProfilePicSmallFullBodyShotV3.jpg', 'image/jpeg', 'http://localhost:8080/pictures/download/ProfilePicSmallFullBodyShotV3.jpg');
 
 
 insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode, person_radius) VALUES (1001, 'Hans', 'Hanseblast', 'Admiralengracht', '202', 'C', 'Amsterdam', '1051AX', '8km');
@@ -27,12 +28,11 @@ insert into person (id, person_firstname, person_lastname, person_street_name, p
 insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode, person_radius) VALUES (1005, 'Itzme', 'Creates', 'ItzmeCreatesPuntKom', '2022', 'A', 'Amsterdam', '1056GZ', '10km');
 
 
-INSERT INTO users (username, id, password, email, enabled, person_id) VALUES ('user', 1001, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica','user@test.nl', TRUE, 1001);
-INSERT INTO users (username, id, password, email, enabled, person_id) VALUES ('admin', 1002, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'admin@test.nl', TRUE, 1002);
-INSERT INTO users (username, id, password, email, enabled, person_id) VALUES ('Bayla', 1003, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'bayla@test.nl', TRUE, 1004);
-INSERT INTO users (username, id, password, email, enabled) VALUES ('piet', 1005, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'piet@test.nl', TRUE);
-INSERT INTO users (username, id, password, email, enabled) VALUES ('hans', 1006, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'hans@test.nl', TRUE);
-INSERT INTO users (username, id, password, email, enabled) VALUES ('itzme', 1007, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'itzme@test.nl', TRUE);
+INSERT INTO users (username, id, password, email, enabled, person_id) VALUES ('admin', 1001, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'admin@test.nl', TRUE, 1002);
+INSERT INTO users (username, id, password, email, enabled, person_id, picture_file_name) VALUES ('Bayla', 1002, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'bayla@test.nl', TRUE, 1004, 'ProfilePicSmallFullBodyShotV3.jpg');
+INSERT INTO users (username, id, password, email, enabled, person_id) VALUES ('harry', 1003, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'harry@test.nl', TRUE, 1003);
+INSERT INTO users (username, id, password, email, enabled, person_id) VALUES ('hans', 1004, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'hans@test.nl', TRUE, 1001);
+INSERT INTO users (username, id, password, email, enabled, person_id) VALUES ('itzme', 1005, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'itzme@test.nl', TRUE, 1005);
 
 
 INSERT INTO authorities (username, authority) VALUES ('user', 'ROLE_USER');

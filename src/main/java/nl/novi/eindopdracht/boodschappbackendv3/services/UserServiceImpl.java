@@ -4,23 +4,22 @@ import nl.novi.eindopdracht.boodschappbackendv3.exceptions.RecordNotFoundExcepti
 import nl.novi.eindopdracht.boodschappbackendv3.exceptions.UsernameAlreadyExistException;
 import nl.novi.eindopdracht.boodschappbackendv3.exceptions.UsernameNotFoundException;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Authority;
-import nl.novi.eindopdracht.boodschappbackendv3.models.FileUploadResponse;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Person;
 import nl.novi.eindopdracht.boodschappbackendv3.models.User;
 import nl.novi.eindopdracht.boodschappbackendv3.repositorys.FileUploadRepository;
 import nl.novi.eindopdracht.boodschappbackendv3.repositorys.PersonRepository;
 import nl.novi.eindopdracht.boodschappbackendv3.repositorys.UserRepository;
 import nl.novi.eindopdracht.boodschappbackendv3.utils.RandomStringGenerator;
-import org.apache.tomcat.util.http.fileupload.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
+@Transactional
 @Service
 public class UserServiceImpl implements UserService {
 
