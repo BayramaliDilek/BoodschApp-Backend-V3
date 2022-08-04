@@ -45,14 +45,6 @@ public class User {
     private Set<Authority> authorities = new HashSet<>();
 
 
-    @OneToMany(
-            mappedBy = "applier")
-    private List<DeliveryRequest> applier;
-
-
-    @OneToMany(mappedBy = "deliverer")
-    private List<DeliveryRequest> deliverer;
-
 
     public String getUsername() {
         return username;
@@ -132,19 +124,5 @@ public class User {
         this.picture = picture;
     }
 
-    public List<DeliveryRequest> getApplier() {
-        return applier;
-    }
 
-    public void setApplier(List<DeliveryRequest> applier) {
-        this.applier = applier;
-    }
-
-    public List<DeliveryRequest> getDeliverer() {
-        return deliverer;
-    }
-
-    public void setDeliverer(List<DeliveryRequest> deliverer) {
-        this.deliverer = deliverer;
-    }
 }

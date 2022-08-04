@@ -24,6 +24,13 @@ public class Person {
     User user;
 
 
+    @OneToMany(
+            mappedBy = "applier")
+    private List<DeliveryRequest> applier;
+
+    @OneToMany(mappedBy = "deliverer")
+    private List<DeliveryRequest> deliverer;
+
 
 
     public Long getId() {
@@ -33,6 +40,8 @@ public class Person {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public void addApplier(DeliveryRequest deliveryRequest) { applier.add(deliveryRequest); };
 
     public String getPersonFirstname() {
         return personFirstname;
@@ -99,9 +108,22 @@ public class Person {
         this.personRadius = radius;
     }
 
-    public String getEmail() {
-        return null;
+
+
+    public List<DeliveryRequest> getApplier() {
+        return applier;
     }
 
+    public void setApplier(List<DeliveryRequest> applier) {
+        this.applier = applier;
+    }
+
+    public List<DeliveryRequest> getDeliverer() {
+        return deliverer;
+    }
+
+    public void setDeliverer(List<DeliveryRequest> deliverer) {
+        this.deliverer = deliverer;
+    }
 
 }

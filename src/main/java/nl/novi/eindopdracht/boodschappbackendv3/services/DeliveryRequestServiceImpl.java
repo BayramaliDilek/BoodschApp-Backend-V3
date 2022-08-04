@@ -1,8 +1,14 @@
 package nl.novi.eindopdracht.boodschappbackendv3.services;
 
+import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.ProductDto;
 import nl.novi.eindopdracht.boodschappbackendv3.exceptions.RecordNotFoundException;
 import nl.novi.eindopdracht.boodschappbackendv3.models.DeliveryRequest;
+import nl.novi.eindopdracht.boodschappbackendv3.models.Person;
+import nl.novi.eindopdracht.boodschappbackendv3.models.Product;
+import nl.novi.eindopdracht.boodschappbackendv3.models.Status;
 import nl.novi.eindopdracht.boodschappbackendv3.repositorys.DeliveryRequestRepository;
+import nl.novi.eindopdracht.boodschappbackendv3.repositorys.PersonRepository;
+import nl.novi.eindopdracht.boodschappbackendv3.repositorys.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,12 +20,16 @@ import java.util.Optional;
 @Service
 public class DeliveryRequestServiceImpl implements DeliveryRequestService {
 
-
+    private final PersonRepository personRepository;
     private final DeliveryRequestRepository deliveryRequestRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public DeliveryRequestServiceImpl(DeliveryRequestRepository deliveryRequestRepository) {
+    public DeliveryRequestServiceImpl(DeliveryRequestRepository deliveryRequestRepository,
+                                      PersonRepository personRepository, ProductRepository productRepository) {
         this.deliveryRequestRepository = deliveryRequestRepository;
+        this.personRepository = personRepository;
+        this.productRepository = productRepository;
     }
 
     @Override
@@ -42,10 +52,26 @@ public class DeliveryRequestServiceImpl implements DeliveryRequestService {
     @Override
     public DeliveryRequest createDeliveryRequest(DeliveryRequest deliveryRequest) {
 
-        deliveryRequest.setId(deliveryRequest.getId());
-        deliveryRequest.setProductList(deliveryRequest.getProductList());
-        deliveryRequest.setStatus(deliveryRequest.getStatus());
-        deliveryRequest.setApplier(deliveryRequest.getApplier());
+        for (Product product : deliveryRequest.getProductList()){
+            Optional<Product> optionalProduct = productRepository.findById(product.getId());
+
+            if (optionalProduct.isPresent()) {
+                Product product1 = optionalProduct.get();
+                product1.setProductList(deliveryRequest);
+                productRepository.save(product1);
+            }
+        }
+
+        deliveryRequest.setStatus(Status.AVAILABLE);
+
+//        deliveryRequest.applier.getId();
+//        Optional<Person> optionalPerson = personRepository.findById(deliveryRequest.getApplier().getId());
+//
+//        if (optionalPerson.isPresent()) {
+//            Person person = optionalPerson.get();
+//            person.addApplier(deliveryRequest);
+//            personRepository.save(person);
+//        }
 
         return deliveryRequestRepository.save(deliveryRequest);
 

@@ -39,7 +39,7 @@ public class Product {
     @OneToOne
     FileUploadResponse picture;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private DeliveryRequest productList;
 
 

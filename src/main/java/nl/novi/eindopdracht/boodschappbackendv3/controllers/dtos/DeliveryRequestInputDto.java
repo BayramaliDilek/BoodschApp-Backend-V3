@@ -3,12 +3,9 @@ package nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos;
 import nl.novi.eindopdracht.boodschappbackendv3.models.DeliveryRequest;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Product;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Status;
-import nl.novi.eindopdracht.boodschappbackendv3.models.User;
+import nl.novi.eindopdracht.boodschappbackendv3.models.Person;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.util.List;
-import java.util.Stack;
 
 public class DeliveryRequestInputDto {
 
@@ -19,9 +16,12 @@ public class DeliveryRequestInputDto {
 
     public Status status;
 
-    public User apllier;
+    public String comment;
 
-    public User deliverer;
+    public Person apllier;
+
+//    public Person deliverer;
+
 
 
     public DeliveryRequest toDeliveryRequest() {
@@ -31,8 +31,9 @@ public class DeliveryRequestInputDto {
         deliveryRequest.setId(id);
         deliveryRequest.setProductList(productList);
         deliveryRequest.setStatus(status);
+        deliveryRequest.setComment(comment);
         deliveryRequest.setApplier(apllier);
-        deliveryRequest.setDeliverer(deliverer);
+//        deliveryRequest.setDeliverer(deliverer);
 
         return deliveryRequest;
 
