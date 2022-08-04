@@ -1,6 +1,10 @@
 package nl.novi.eindopdracht.boodschappbackendv3.models;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -9,24 +13,31 @@ public class DeliveryRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
-    @OneToMany(mappedBy = "productList")
-    public List<Product> productList;
+
+    @OneToMany(mappedBy = "productList",
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
+    public List<Product> productList = new ArrayList<>();
 
     public Status status;
 
-    @ManyToOne
-    public User applier;
+
+    public String comment;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    public Person applier;
 
     @ManyToOne
-    public User deliverer;
+    public Person deliverer;
 
     public DeliveryRequest() {
     }
 
-    public DeliveryRequest(List<Product> productList, User applier) {
+    public DeliveryRequest(List<Product> productList, Person applier) {
         this.productList = productList;
-        this.status = Status.PENDING;
+        this.status = Status.AVAILABLE;
         this.applier = applier;
+        this.comment = comment;
     }
 
 
@@ -54,20 +65,28 @@ public class DeliveryRequest {
         this.status = status;
     }
 
-    public User getApplier() {
+    public Person getApplier() {
         return applier;
     }
 
-    public void setApplier(User applier) {
+    public void setApplier(Person applier) {
         this.applier = applier;
     }
 
-    public User getDeliverer() {
+    public Person getDeliverer() {
         return deliverer;
     }
 
-    public void setDeliverer(User deliverer) {
+    public void setDeliverer(Person deliverer) {
         this.deliverer = deliverer;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }
 

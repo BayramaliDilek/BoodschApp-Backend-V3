@@ -45,8 +45,17 @@ public class DeliveryRequestController {
     }
 
 
+//    @PostMapping("/create")
+//    public DeliveryRequestDto createDeliveryRequest(@RequestBody DeliveryRequestInputDto dto){
+//        var deliveryRequest = deliveryRequestService.createDeliveryRequest(dto.personId);
+//
+//        return DeliveryRequestDto.fromDeliveryRequest(deliveryRequest);
+//    }
+
+
     @PostMapping("/create")
     public DeliveryRequestDto createDeliveryRequest(@RequestBody DeliveryRequestInputDto dto){
+
         var deliveryRequest = deliveryRequestService.createDeliveryRequest(dto.toDeliveryRequest());
 
         return DeliveryRequestDto.fromDeliveryRequest(deliveryRequest);
