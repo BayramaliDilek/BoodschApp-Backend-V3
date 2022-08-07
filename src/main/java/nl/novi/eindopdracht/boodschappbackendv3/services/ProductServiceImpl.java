@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,12 +76,23 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product createProduct(Product product) {
 
+
         product.setId(product.getId());
         product.setProductName(product.getProductName());
         product.setProductType(product.getProductType());
         product.setDescription(product.getDescription());
         product.setIngredients(product.getIngredients());
+
+
+//        double doubleValue = product.getPrice();
+//        BigDecimal bigDecimalDouble = new BigDecimal(doubleValue);
+//
+//        BigDecimal bigDecimalWithScale = bigDecimalDouble.setScale(2, RoundingMode.HALF_UP);
+
+
         product.setPrice(product.getPrice());
+
+
         product.setQuantity(product.getQuantity());
 
         return productRepository.save(product);
@@ -110,8 +123,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProduct(String productName) {
-        productRepository.deleteById(productName);
+    public void deleteProduct(Long id) {
+        productRepository.deleteById(id);
     }
 
 
@@ -119,13 +132,10 @@ public class ProductServiceImpl implements ProductService {
     public void assignPictureToProduct(String fileName, Long id) {
 
         var optionalProduct = productRepository.findById(id);
-
         var optionalPicture = fileUploadRepository.findByFileName(fileName);
 
         if (optionalProduct.isPresent() && optionalPicture.isPresent()) {
-
             var product = optionalProduct.get();
-
             var picture = optionalPicture.get();
 
             product.setPicture(picture);

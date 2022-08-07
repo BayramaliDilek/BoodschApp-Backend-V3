@@ -2,14 +2,15 @@ package nl.novi.eindopdracht.boodschappbackendv3.controllers;
 
 import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.DeliveryRequestDto;
 import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.DeliveryRequestInputDto;
+import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.DeliveryRequestStatusDto;
 import nl.novi.eindopdracht.boodschappbackendv3.models.DeliveryRequest;
 import nl.novi.eindopdracht.boodschappbackendv3.services.DeliveryRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 @CrossOrigin
 @RestController
@@ -24,7 +25,7 @@ public class DeliveryRequestController {
         this.deliveryRequestService = deliveryRequestService;
     }
 
-    @GetMapping()
+    @GetMapping("/all")
     public List<DeliveryRequestDto> getDeliveryRequests() {
 
         var dtos = new ArrayList<DeliveryRequestDto>();
@@ -53,27 +54,34 @@ public class DeliveryRequestController {
 //    }
 
 
+//    @PostMapping("/create")
+//    public DeliveryRequestDto createDeliveryRequest(@RequestBody DeliveryRequestInputDto dto){
+//
+//        var deliveryRequest = deliveryRequestService.createDeliveryRequest(dto.toDeliveryRequest());
+//
+//        return DeliveryRequestDto.fromDeliveryRequest(deliveryRequest);
+//    }
+
     @PostMapping("/create")
-    public DeliveryRequestDto createDeliveryRequest(@RequestBody DeliveryRequestInputDto dto){
+    public DeliveryRequest createDeliveryRequest(@RequestBody DeliveryRequestInputDto dto){
 
-        var deliveryRequest = deliveryRequestService.createDeliveryRequest(dto.toDeliveryRequest());
-
-        return DeliveryRequestDto.fromDeliveryRequest(deliveryRequest);
+        return deliveryRequestService.createDeliveryRequest(dto);
     }
 
     @PutMapping("/{id}")
-    public DeliveryRequestDto updateDeliveryRequest(@PathVariable Long id,
-                                                    @RequestBody DeliveryRequest deliveryRequest){
-        deliveryRequestService.updateDeliveryRequest(deliveryRequest);
+    public ResponseEntity<String> updateDeliveryRequest(@PathVariable Long id,
+                                                @RequestBody DeliveryRequestStatusDto deliveryRequestStatusDto){
+        deliveryRequestService.updateDeliveryRequest(deliveryRequestStatusDto);
 
-        return DeliveryRequestDto.fromDeliveryRequest(deliveryRequest);
+        return ResponseEntity.ok().body("status update geslaagd");
     }
 
 
-
-    @DeleteMapping("{id}")
-    public void deleteDeliveryRequest(@PathVariable("id")Long id){
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity<?> deleteDeliveryRequest(@PathVariable("id")Long id){
         deliveryRequestService.deleteDeliveryRequest(id);
+
+        return ResponseEntity.noContent().build();
     }
 
 

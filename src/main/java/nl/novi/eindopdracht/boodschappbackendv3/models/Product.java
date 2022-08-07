@@ -1,13 +1,15 @@
 package nl.novi.eindopdracht.boodschappbackendv3.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import lombok.Data;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
 @Entity
+@TypeDef(name = "json", typeClass = JsonStringType.class)
 @Table(name = "products")
 public class Product {
 
@@ -16,7 +18,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "product_id")
     public Long id;
-    @Column(name = "product_name")
+    @Column(name = "product_name",
+            length = 1000)
     public String productName;
     @Column(name = "product_type")
     public String productType;
@@ -31,16 +34,13 @@ public class Product {
     )
     public String ingredients;
     @Column(name = "product_price")
-    public Float price;
+    public double price;
 
     @Column(name = "product_quantity")
     public Float quantity;
 
     @OneToOne
     FileUploadResponse picture;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private DeliveryRequest productList;
 
 
     public Long getId() {
@@ -63,7 +63,7 @@ public class Product {
         return ingredients;
     }
 
-    public Float getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -99,7 +99,7 @@ public class Product {
         this.ingredients = ingredients;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -107,12 +107,12 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public DeliveryRequest getProductList() {
-        return productList;
-    }
-
-    public void setProductList(DeliveryRequest productList) {
-        this.productList = productList;
-    }
+//    public DeliveryRequest getProductList() {
+//        return productList;
+//    }
+//
+//    public void setProductList(DeliveryRequest productList) {
+//        this.productList = productList;
+//    }
 }
 

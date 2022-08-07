@@ -2,9 +2,12 @@ package nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos;
 
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Getter;
+import lombok.Setter;
 import nl.novi.eindopdracht.boodschappbackendv3.models.FileUploadResponse;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Product;
 
+@Getter @Setter
 public class ProductDto {
 
     public Long id;
@@ -12,8 +15,7 @@ public class ProductDto {
     public String productType;
     public String description;
     public String ingredients;
-    public Float price;
-
+    public double price;
     public Float quantity;
 
     @JsonSerialize

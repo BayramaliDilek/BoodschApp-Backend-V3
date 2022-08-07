@@ -6,6 +6,7 @@ import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.ProductInputDto
 import nl.novi.eindopdracht.boodschappbackendv3.models.Product;
 import nl.novi.eindopdracht.boodschappbackendv3.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -80,11 +81,20 @@ public class ProductController {
         return ProductDto.fromProduct(product);
     }
 
-    @DeleteMapping(path = "{id}")
-    public void deleteProduct(
-            @PathVariable("id") String productName) {
-        productService.deleteProduct(productName);
+//    @DeleteMapping(path = "{id}")
+//    public void deleteProduct(
+//            @PathVariable("id") Long id) {
+//        productService.deleteProduct(id);
+//    }
+
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity<Product> deleteProduct(@PathVariable("id") Long id) {
+
+        productService.deleteProduct(id);
+
+        return ResponseEntity.noContent().build();
     }
+
 
 
     @PutMapping("product/{id}/picture/{fileName}")
