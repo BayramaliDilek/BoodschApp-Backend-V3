@@ -1,41 +1,41 @@
 package nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos;
 
-import nl.novi.eindopdracht.boodschappbackendv3.models.DeliveryRequest;
-import nl.novi.eindopdracht.boodschappbackendv3.models.Product;
-import nl.novi.eindopdracht.boodschappbackendv3.models.Status;
-import nl.novi.eindopdracht.boodschappbackendv3.models.Person;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.util.List;
 
 public class DeliveryRequestInputDto {
 
-
-    public Long id;
-
-    public List<Product> productList;
-
-    public Status status;
-
-    public String comment;
-
-    public Person apllier;
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+    private List<Long> productList;
+    private String comment;
+    private Long applier;
 
 //    public Person deliverer;
 
 
+    public List<Long> getProductList() {
+        return productList;
+    }
 
-    public DeliveryRequest toDeliveryRequest() {
+    public void setProductList(List<Long> productList) {
+        this.productList = productList;
+    }
 
-        var deliveryRequest = new DeliveryRequest();
+    public String getComment() {
+        return comment;
+    }
 
-        deliveryRequest.setId(id);
-        deliveryRequest.setProductList(productList);
-        deliveryRequest.setStatus(status);
-        deliveryRequest.setComment(comment);
-        deliveryRequest.setApplier(apllier);
-//        deliveryRequest.setDeliverer(deliverer);
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 
-        return deliveryRequest;
+    public Long getApplier() {
+        return applier;
+    }
 
+    public void setApplier(Long applier) {
+        this.applier = applier;
     }
 }

@@ -1,45 +1,43 @@
 package nl.novi.eindopdracht.boodschappbackendv3.models;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class DeliveryRequest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long id;
+    private Long id;
 
-    @OneToMany(mappedBy = "productList",
-            orphanRemoval = true,
-            cascade = CascadeType.ALL)
-    public List<Product> productList = new ArrayList<>();
+//    @OneToMany(mappedBy = "productList",
+//            orphanRemoval = true,
+//            cascade = CascadeType.ALL)
+//    private List<Product> productList = new ArrayList<>();
 
-    public Status status;
+    @Type( type = "json" )
+    @SuppressWarnings("JpaAttributeTypeInspection")
+    private Map<Long, String> productList;
 
+    private Status status;
 
-    public String comment;
+    private String comment;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.PERSIST)
-    public Person applier;
+    private Person applier;
 
+    @JsonIgnore
     @ManyToOne
-    public Person deliverer;
+    private Person deliverer;
 
     public DeliveryRequest() {
     }
-
-    public DeliveryRequest(List<Product> productList, Person applier) {
-        this.productList = productList;
-        this.status = Status.AVAILABLE;
-        this.applier = applier;
-        this.comment = comment;
-    }
-
 
     public Long getId() {
         return id;
@@ -49,11 +47,20 @@ public class DeliveryRequest {
         this.id = id;
     }
 
-    public List<Product> getProductList() {
+//    public List<Product> getProductList() {
+//        return productList;
+//    }
+//
+//    public void setProductList(List<Product> productList) {
+//        this.productList = productList;
+//    }
+
+
+        public Map<Long, String> getProductList() {
         return productList;
     }
 
-    public void setProductList(List<Product> productList) {
+    public void setProductList(Map<Long, String> productList) {
         this.productList = productList;
     }
 

@@ -38,12 +38,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -71,12 +69,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers(HttpMethod.PUT, "/products/{id}/picture").permitAll()
 
+
                 .antMatchers(HttpMethod.DELETE, "/persons/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/products/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/products/").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/products/{id}").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/users/").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/users/{username}").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/deliveryRequests/delete/{id}").hasRole("ADMIN")
 
                 .antMatchers("/authenticated").authenticated()
                 .antMatchers("/authenticate").permitAll()
