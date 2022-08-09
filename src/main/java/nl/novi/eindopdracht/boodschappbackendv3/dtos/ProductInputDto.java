@@ -1,25 +1,17 @@
-package nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos;
-
-//import nl.novi.eindopdracht.boodschappbackendv3.models.FileUploadResponse;
+package nl.novi.eindopdracht.boodschappbackendv3.dtos;
+import lombok.Data;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Product;
 
-
+@Data
 public class ProductInputDto {
 
     public Long id;
-
     public String productName;
-
     public String productType;
-
     public String description;
-
     public String ingredients;
-
     public Float price;
 
-
-//    public FileUploadResponse image;
 
     public Product toProduct() {
 
@@ -35,5 +27,3 @@ public class ProductInputDto {
     }
 
 }
-
-//product.setPicture(image);

@@ -1,7 +1,7 @@
 package nl.novi.eindopdracht.boodschappbackendv3.controllers;
 
-import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.PersonDto;
-import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.PersonInputDto;
+import nl.novi.eindopdracht.boodschappbackendv3.dtos.PersonDto;
+import nl.novi.eindopdracht.boodschappbackendv3.dtos.PersonInputDto;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Person;
 import nl.novi.eindopdracht.boodschappbackendv3.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;

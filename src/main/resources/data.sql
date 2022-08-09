@@ -21,11 +21,11 @@ INSERT INTO picture ( file_name, content_type, url) VALUES ('frambozen.jpg', 'im
 INSERT INTO picture ( file_name, content_type, url) VALUES ('ProfilePicSmallFullBodyShotV3.jpg', 'image/jpeg', 'http://localhost:8080/pictures/download/ProfilePicSmallFullBodyShotV3.jpg');
 
 
-insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode, person_radius) VALUES (1001, 'Hans', 'Hanseblast', 'Admiralengracht', '202', 'C', 'Amsterdam', '1051AX', '8km');
-insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode, person_radius) VALUES (1002, 'Admin', 'istrator', 'Adminweg', '164', 'C', 'Amsterdam', '1052AX', '10km');
-insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode, person_radius) VALUES (1003, 'Harry', 'Gekk', 'Groenestraat', '63', 'C', 'Amsterdam', '1054AX', '0km');
-insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode, person_radius) VALUES (1004, 'Bayla', 'Itzme', 'Graphics&Weblaan', '888', 'A', 'Amsterdam', '1111AA', '13km');
-insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode, person_radius) VALUES (1005, 'Itzme', 'Creates', 'ItzmeCreatesPuntKom', '2022', 'A', 'Amsterdam', '1056GZ', '10km');
+insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode) VALUES (1001, 'Hans', 'Hanseblast', 'Admiralengracht', '202', 'C', 'Amsterdam', '1051AX');
+insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode) VALUES (1002, 'Admin', 'istrator', 'Adminweg', '164', 'C', 'Amsterdam', '1052AX');
+insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode) VALUES (1003, 'Harry', 'Gekk', 'Groenestraat', '63', 'C', 'Amsterdam', '1054AX');
+insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode) VALUES (1004, 'Bayla', 'Itzme', 'Graphics&Weblaan', '888', 'A', 'Amsterdam', '1111AA');
+insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode) VALUES (1005, 'Itzme', 'Creates', 'ItzmeCreatesPuntKom', '2022', 'A', 'Amsterdam', '1056GZ');
 
 
 INSERT INTO users (username, id, password, email, enabled, person_id) VALUES ('admin', 1001, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'admin@test.nl', TRUE, 1002);

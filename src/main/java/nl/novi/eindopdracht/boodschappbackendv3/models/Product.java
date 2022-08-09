@@ -1,12 +1,9 @@
 package nl.novi.eindopdracht.boodschappbackendv3.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
-import lombok.Data;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @TypeDef(name = "json", typeClass = JsonStringType.class)
@@ -97,13 +94,5 @@ public class Product {
         this.price = price;
     }
 
-
-//    public DeliveryRequest getProductList() {
-//        return productList;
-//    }
-//
-//    public void setProductList(DeliveryRequest productList) {
-//        this.productList = productList;
-//    }
 }
 
