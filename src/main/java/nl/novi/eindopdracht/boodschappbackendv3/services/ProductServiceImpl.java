@@ -76,24 +76,17 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product createProduct(Product product) {
 
-
         product.setId(product.getId());
         product.setProductName(product.getProductName());
         product.setProductType(product.getProductType());
         product.setDescription(product.getDescription());
         product.setIngredients(product.getIngredients());
 
-
 //        double doubleValue = product.getPrice();
 //        BigDecimal bigDecimalDouble = new BigDecimal(doubleValue);
-//
 //        BigDecimal bigDecimalWithScale = bigDecimalDouble.setScale(2, RoundingMode.HALF_UP);
 
-
         product.setPrice(product.getPrice());
-
-
-        product.setQuantity(product.getQuantity());
 
         return productRepository.save(product);
     }
@@ -114,7 +107,6 @@ public class ProductServiceImpl implements ProductService {
             product1.setDescription(product.getDescription());
             product1.setIngredients(product.getIngredients());
             product1.setPrice(product.getPrice());
-            product1.setQuantity(product.getQuantity());
 
             productRepository.save(product1);
 

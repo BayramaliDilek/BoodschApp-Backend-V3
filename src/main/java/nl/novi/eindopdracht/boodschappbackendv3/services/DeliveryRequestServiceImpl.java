@@ -85,7 +85,8 @@ public class DeliveryRequestServiceImpl implements DeliveryRequestService {
 
             }
         }
-        deliveryRequest.setStatus(Status.AVAILABLE);
+        deliveryRequest.setStatus(deliveryRequestInputDto.getStatus().AVAILABLE);
+//        deliveryRequest.setStatus(Status.AVAILABLE);
         deliveryRequest.setProductList(productList2);
         deliveryRequest.setComment(deliveryRequestInputDto.getComment());
         deliveryRequest.setApplier(personRepository.getReferenceById(deliveryRequestInputDto.getApplier()));
