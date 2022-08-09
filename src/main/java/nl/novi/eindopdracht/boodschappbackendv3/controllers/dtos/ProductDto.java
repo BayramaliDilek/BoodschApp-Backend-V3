@@ -16,7 +16,7 @@ public class ProductDto {
     public String description;
     public String ingredients;
     public double price;
-    public Float quantity;
+
 
     @JsonSerialize
     FileUploadResponse picture;
@@ -36,8 +36,6 @@ public class ProductDto {
         dto.ingredients = product.getIngredients();
 
         dto.price = product.getPrice();
-
-        dto.quantity = product.getQuantity();
 
         dto.picture = product.getPicture();
 

@@ -36,9 +36,6 @@ public class Product {
     @Column(name = "product_price")
     public double price;
 
-    @Column(name = "product_quantity")
-    public Float quantity;
-
     @OneToOne
     FileUploadResponse picture;
 
@@ -67,9 +64,6 @@ public class Product {
         return price;
     }
 
-    public Float getQuantity() {
-        return quantity;
-    }
 
     public FileUploadResponse getPicture() {
         return picture;
@@ -103,9 +97,6 @@ public class Product {
         this.price = price;
     }
 
-    public void setQuantity(Float quantity) {
-        this.quantity = quantity;
-    }
 
 //    public DeliveryRequest getProductList() {
 //        return productList;
