@@ -1,12 +1,14 @@
 package nl.novi.eindopdracht.boodschappbackendv3.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 @Entity
 public class DeliveryRequest {
@@ -15,12 +17,7 @@ public class DeliveryRequest {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-//    @OneToMany(mappedBy = "productList",
-//            orphanRemoval = true,
-//            cascade = CascadeType.ALL)
-//    private List<Product> productList = new ArrayList<>();
-
-    @Type( type = "json" )
+    @Type(type = "json")
     @SuppressWarnings("JpaAttributeTypeInspection")
     private Map<Long, String> productList;
 
@@ -47,16 +44,8 @@ public class DeliveryRequest {
         this.id = id;
     }
 
-//    public List<Product> getProductList() {
-//        return productList;
-//    }
-//
-//    public void setProductList(List<Product> productList) {
-//        this.productList = productList;
-//    }
 
-
-        public Map<Long, String> getProductList() {
+    public Map<Long, String> getProductList() {
         return productList;
     }
 

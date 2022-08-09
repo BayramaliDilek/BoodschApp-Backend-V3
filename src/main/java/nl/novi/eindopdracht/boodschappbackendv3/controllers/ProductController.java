@@ -1,8 +1,7 @@
 package nl.novi.eindopdracht.boodschappbackendv3.controllers;
 
-
-import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.ProductDto;
-import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.ProductInputDto;
+import nl.novi.eindopdracht.boodschappbackendv3.dtos.ProductDto;
+import nl.novi.eindopdracht.boodschappbackendv3.dtos.ProductInputDto;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Product;
 import nl.novi.eindopdracht.boodschappbackendv3.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

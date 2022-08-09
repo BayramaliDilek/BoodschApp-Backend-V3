@@ -94,7 +94,6 @@ public class PersonServiceImpl implements PersonService {
             person1.setPersonHouseNumberAdd(person.getPersonHouseNumberAdd());
             person1.setPersonCity(person.getPersonCity());
             person1.setPersonZipcode(person.getPersonZipcode());
-            person1.setPersonRadius(person.getPersonRadius());
 
             personRepository.save(person1);
         }

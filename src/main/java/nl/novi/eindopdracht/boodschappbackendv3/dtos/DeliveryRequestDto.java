@@ -1,9 +1,10 @@
-package nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos;
+package nl.novi.eindopdracht.boodschappbackendv3.dtos;
 
+import java.util.Map;
 import nl.novi.eindopdracht.boodschappbackendv3.models.DeliveryRequest;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Status;
 
-import java.util.Map;
+
 
 public class DeliveryRequestDto {
 
@@ -15,8 +16,6 @@ public class DeliveryRequestDto {
 
     private String comment;
     private PersonDto applier;
-    private PersonDto deliverer;
-
 
     public static DeliveryRequestDto fromDeliveryRequest(DeliveryRequest deliveryRequest) {
 
@@ -31,8 +30,6 @@ public class DeliveryRequestDto {
         dto.setComment(deliveryRequest.getComment());
 
         dto.setApplier(PersonDto.fromPerson(deliveryRequest.getApplier()));
-
-        dto.setDeliverer(PersonDto.fromPerson(deliveryRequest.getDeliverer()));
 
         return dto;
 
@@ -78,11 +75,4 @@ public class DeliveryRequestDto {
         this.applier = applier;
     }
 
-    public PersonDto getDeliverer() {
-        return deliverer;
-    }
-
-    public void setDeliverer(PersonDto deliverer) {
-        this.deliverer = deliverer;
-    }
 }

@@ -1,14 +1,10 @@
 package nl.novi.eindopdracht.boodschappbackendv3.services;
 
-import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.DeliveryRequestDto;
-import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.DeliveryRequestInputDto;
-import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.DeliveryRequestStatusDto;
-import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.ProductDto;
+import nl.novi.eindopdracht.boodschappbackendv3.dtos.DeliveryRequestInputDto;
+import nl.novi.eindopdracht.boodschappbackendv3.dtos.DeliveryRequestStatusDto;
 import nl.novi.eindopdracht.boodschappbackendv3.exceptions.RecordNotFoundException;
 import nl.novi.eindopdracht.boodschappbackendv3.models.DeliveryRequest;
-import nl.novi.eindopdracht.boodschappbackendv3.models.Person;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Product;
-import nl.novi.eindopdracht.boodschappbackendv3.models.Status;
 import nl.novi.eindopdracht.boodschappbackendv3.repositorys.DeliveryRequestRepository;
 import nl.novi.eindopdracht.boodschappbackendv3.repositorys.PersonRepository;
 import nl.novi.eindopdracht.boodschappbackendv3.repositorys.ProductRepository;
@@ -50,7 +46,6 @@ public class DeliveryRequestServiceImpl implements DeliveryRequestService {
         } else {
             throw new RecordNotFoundException("deliveryRequest niet gevonden");
         }
-
     }
 
     @Override
@@ -64,24 +59,19 @@ public class DeliveryRequestServiceImpl implements DeliveryRequestService {
             Optional<Product> optional = productRepository.findById(product);
 
             if (!productList2.containsKey(product)) {
-                productList2.put(product, "1-" + optional.get().productName + "-" + optional.get().getPrice());
+                productList2.put(product, "1-" + "x " + optional.get().productName + "-" + '_' + '€' +  optional.get().getPrice());
             } else {
                 String[] customArr = productList2.get(product).split("-");
 
                 int quantity =  Integer.parseInt(customArr[0]);
                 int actualQuantity = quantity + 1;
-//                double totalPrice =  optional.get().getPrice() * actualQuantity;
-//                double roundedPrice = (Math.round(totalPrice*100)/100);
-
-//                productList2.put(product, actualQuantity + "-" + optional.get().getProductName() + "-" + roundedPrice);
 
                 double doubleValue =  optional.get().getPrice() * actualQuantity;
                 BigDecimal bigDecimalDouble = new BigDecimal(doubleValue);
 
                 BigDecimal bigDecimalWithScale = bigDecimalDouble.setScale(2, RoundingMode.HALF_UP);
 
-
-                productList2.put(product, actualQuantity + "-" + optional.get().getProductName() + "-" + bigDecimalWithScale);
+                productList2.put(product, actualQuantity + "-x "  + optional.get().getProductName() + "-" + '_' +  '€' +  bigDecimalWithScale);
 
             }
         }
@@ -102,76 +92,6 @@ public class DeliveryRequestServiceImpl implements DeliveryRequestService {
             throw new RecordNotFoundException("Delivery request not found");
         }
     }
-
-//ORIGNEEELL
-
-//    @Override
-//    public DeliveryRequestDto createDeliveryRequest(DeliveryRequestInputDto deliveryRequestInputDto) {
-//        DeliveryRequest deliveryRequest = new DeliveryRequest();
-//        List<Product> productList = new ArrayList<>();
-//        List<Long> productListLong = deliveryRequestInputDto.productList;
-//        for (Long product : productListLong) {
-//            Product product1 = productRepository.findById(product).orElseThrow(() -> new RecordNotFoundException("product doesnt exist"));
-//            productList.add(product1);
-//        }
-//        deliveryRequest.setStatus(Status.AVAILABLE);
-//        deliveryRequest.setProductList(productList);
-//        deliveryRequest.setComment(deliveryRequestInputDto.getComment());
-//        deliveryRequest.setApplier(personRepository.getReferenceById(deliveryRequestInputDto.getApplier()));
-//        deliveryRequestRepository.save(deliveryRequest);
-//        return DeliveryRequestDto.fromDeliveryRequest(deliveryRequest);
-//    }
-
-//    @Override
-//    public DeliveryRequest createDeliveryRequest(DeliveryRequest deliveryRequest) {
-//
-//        for (Product product : deliveryRequest.getProductList()){
-//            Optional<Product> optionalProduct = productRepository.findById(product.getId());
-//
-//            if (optionalProduct.isPresent()) {
-//                Product product1 = optionalProduct.get();
-//                product1.setProductList(deliveryRequest);
-//                productRepository.save(product1);
-//            }
-//        }
-//
-//        deliveryRequest.setStatus(Status.AVAILABLE);
-//
-////        deliveryRequest.applier.getId();
-////        Optional<Person> optionalPerson = personRepository.findById(deliveryRequest.getApplier().getId());
-////
-////        if (optionalPerson.isPresent()) {
-////            Person person = optionalPerson.get();
-////            person.addApplier(deliveryRequest);
-////            personRepository.save(person);
-////        }
-//
-//        return deliveryRequestRepository.save(deliveryRequest);
-//
-//    }
-
-
-//    @Override
-//    public void updateDeliveryRequest(DeliveryRequest deliveryRequest) {
-//
-//        Optional<DeliveryRequest> optionalDeliveryRequest = deliveryRequestRepository.findById(deliveryRequest.getId());
-//
-//        if (optionalDeliveryRequest.isEmpty()) {
-//            throw new RecordNotFoundException("deliveryRequest niet gevonden");
-//        } else {
-//
-//            DeliveryRequest deliveryRequest1 = optionalDeliveryRequest.get();
-//
-//            if (deliveryRequest.getStatus() != null ) {
-//            deliveryRequest1.setStatus(deliveryRequest.getStatus());}
-//
-//            if (deliveryRequest.getDeliverer() != null ) {
-//            deliveryRequest1.setDeliverer(deliveryRequest.getDeliverer()); }
-//
-//            deliveryRequestRepository.save(deliveryRequest1);
-//
-//        }
-//    }
 
     @Override
     public void deleteDeliveryRequest(Long id){

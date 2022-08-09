@@ -1,6 +1,5 @@
 package nl.novi.eindopdracht.boodschappbackendv3.models;
 
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,11 +17,10 @@ public class Person {
     String personHouseNumberAdd;
     String personCity;
     String personZipcode;
-    String personRadius;
+
 
     @OneToOne(mappedBy = "person")
     User user;
-
 
     @OneToMany(
             mappedBy = "applier")
@@ -40,8 +38,6 @@ public class Person {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public void addApplier(DeliveryRequest deliveryRequest) { applier.add(deliveryRequest); };
 
     public String getPersonFirstname() {
         return personFirstname;
@@ -99,31 +95,5 @@ public class Person {
         this.personZipcode = zipcode;
     }
 
-
-    public String getPersonRadius() {
-        return personRadius;
-    }
-
-    public void setPersonRadius(String radius) {
-        this.personRadius = radius;
-    }
-
-
-
-    public List<DeliveryRequest> getApplier() {
-        return applier;
-    }
-
-    public void setApplier(List<DeliveryRequest> applier) {
-        this.applier = applier;
-    }
-
-    public List<DeliveryRequest> getDeliverer() {
-        return deliverer;
-    }
-
-    public void setDeliverer(List<DeliveryRequest> deliverer) {
-        this.deliverer = deliverer;
-    }
 
 }

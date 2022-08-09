@@ -1,5 +1,4 @@
-package nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos;
-
+package nl.novi.eindopdracht.boodschappbackendv3.dtos;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Person;
 
 public class PersonDto {
@@ -12,8 +11,6 @@ public class PersonDto {
     public String personHouseNumberAdd;
     public String personCity;
     public String personZipcode;
-    public String personRadius;
-
 
 
     public static PersonDto fromPerson(Person person) {
@@ -36,8 +33,6 @@ public class PersonDto {
         dto.personCity = person.getPersonCity();
 
         dto.personZipcode = person.getPersonZipcode();
-
-        dto.personRadius = person.getPersonRadius();
 
         return dto;
     }

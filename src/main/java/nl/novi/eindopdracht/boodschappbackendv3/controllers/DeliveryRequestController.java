@@ -1,8 +1,8 @@
 package nl.novi.eindopdracht.boodschappbackendv3.controllers;
 
-import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.DeliveryRequestDto;
-import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.DeliveryRequestInputDto;
-import nl.novi.eindopdracht.boodschappbackendv3.controllers.dtos.DeliveryRequestStatusDto;
+import nl.novi.eindopdracht.boodschappbackendv3.dtos.DeliveryRequestDto;
+import nl.novi.eindopdracht.boodschappbackendv3.dtos.DeliveryRequestInputDto;
+import nl.novi.eindopdracht.boodschappbackendv3.dtos.DeliveryRequestStatusDto;
 import nl.novi.eindopdracht.boodschappbackendv3.models.DeliveryRequest;
 import nl.novi.eindopdracht.boodschappbackendv3.services.DeliveryRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,22 +46,6 @@ public class DeliveryRequestController {
     }
 
 
-//    @PostMapping("/create")
-//    public DeliveryRequestDto createDeliveryRequest(@RequestBody DeliveryRequestInputDto dto){
-//        var deliveryRequest = deliveryRequestService.createDeliveryRequest(dto.personId);
-//
-//        return DeliveryRequestDto.fromDeliveryRequest(deliveryRequest);
-//    }
-
-
-//    @PostMapping("/create")
-//    public DeliveryRequestDto createDeliveryRequest(@RequestBody DeliveryRequestInputDto dto){
-//
-//        var deliveryRequest = deliveryRequestService.createDeliveryRequest(dto.toDeliveryRequest());
-//
-//        return DeliveryRequestDto.fromDeliveryRequest(deliveryRequest);
-//    }
-
     @PostMapping("/create")
     public DeliveryRequest createDeliveryRequest(@RequestBody DeliveryRequestInputDto dto){
 
@@ -83,11 +67,6 @@ public class DeliveryRequestController {
 
         return ResponseEntity.noContent().build();
     }
-
-
-
-
-
 
 
 

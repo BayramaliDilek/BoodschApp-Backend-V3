@@ -2,7 +2,6 @@ package nl.novi.eindopdracht.boodschappbackendv3.services;
 
 import nl.novi.eindopdracht.boodschappbackendv3.exceptions.RecordNotFoundException;
 import nl.novi.eindopdracht.boodschappbackendv3.exceptions.UsernameAlreadyExistException;
-import nl.novi.eindopdracht.boodschappbackendv3.exceptions.UsernameNotFoundException;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Authority;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Person;
 import nl.novi.eindopdracht.boodschappbackendv3.models.User;
@@ -82,42 +81,6 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(username);
     }
 
-    @Override
-    public void updateUser(String username, User user) {
-        if (!userRepository.existsById(username)) throw new RecordNotFoundException();
-        User user1 = userRepository.findById(username).get();
-
-
-        user1.setPassword(user.getPassword());
-        user1.setUsername(user.getUsername());
-        user1.setPicture(user.getPicture());
-
-        userRepository.save(user1);
-
-    }
-
-    public Set<Authority> getAuthorities(String username) {
-        if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
-        User user = userRepository.findById(username).get();
-        return user.getAuthorities();
-    }
-
-    public void addAuthority(String username, String authority) {
-
-        if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
-        User user = userRepository.findById(username).get();
-        user.addAuthority(new Authority(username, authority));
-
-        userRepository.save(user);
-    }
-
-    public void removeAuthority(String username, String authority) {
-        if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
-        User user = userRepository.findById(username).get();
-        Authority authorityToRemove = user.getAuthorities().stream().filter((a) -> a.getAuthority().equalsIgnoreCase(authority)).findAny().get();
-        user.removeAuthority(authorityToRemove);
-        userRepository.save(user);
-    }
 
     public void assignPersonToUser(Long personId, String username) {
         var optionalUser = userRepository.findById(username);
@@ -149,8 +112,6 @@ public class UserServiceImpl implements UserService {
 
         }
 
-
     }
-
 
 }
