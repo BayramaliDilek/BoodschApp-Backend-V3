@@ -9,6 +9,7 @@ import nl.novi.eindopdracht.boodschappbackendv3.models.Status;
 public class DeliveryRequestDto {
 
     private Long id;
+
     @SuppressWarnings("JpaAttributeTypeInspection")
     private Map<Long, String> productList;
 

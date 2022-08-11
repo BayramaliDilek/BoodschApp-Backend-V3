@@ -152,7 +152,7 @@ class PersonServiceImplTest {
     }
 
     @Test
-    @DisplayName("Should returns all persons")
+    @DisplayName("Should return all persons")
     void getPersonListShouldReturnsAllPersons() {
 
         Person person1 = new Person();
