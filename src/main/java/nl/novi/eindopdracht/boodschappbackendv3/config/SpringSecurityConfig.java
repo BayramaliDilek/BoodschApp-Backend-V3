@@ -56,30 +56,38 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT, "/users/{username}/picture").permitAll()
                 .antMatchers(HttpMethod.GET, "/users/").permitAll()
                 .antMatchers(HttpMethod.GET, "/users/all").permitAll()
-                .antMatchers(HttpMethod.GET, "/users/all").permitAll()
-
-                .antMatchers(HttpMethod.POST, "/users/**").permitAll()
-
-                .antMatchers(HttpMethod.GET, "/persons").hasRole("ADMIN")
-
-                .antMatchers(HttpMethod.GET, "/persons/users").permitAll()
-                .antMatchers(HttpMethod.POST, "/persons/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/persons").permitAll()
-                .antMatchers(HttpMethod.PUT, "/persons").permitAll()
-
-                .antMatchers(HttpMethod.PUT, "/products/{id}/picture").permitAll()
-
-
-                .antMatchers(HttpMethod.DELETE, "/persons/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/products/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/products/").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/products/{id}").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/users/").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/users/{username}").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/users/**").permitAll()
+
+                .antMatchers(HttpMethod.GET, "/persons").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/persons/users").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/persons/{id}").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/persons/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/persons").permitAll()
+                .antMatchers(HttpMethod.PUT, "/persons/{id}").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/persons/**").hasRole("ADMIN")
+
+                .antMatchers(HttpMethod.GET, "/products").permitAll()
+                .antMatchers(HttpMethod.GET, "/products/{id}").permitAll()
+                .antMatchers(HttpMethod.POST, "/products/{id}/picture").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/products/{id}/picture").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/products/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/products/").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/products/{id}").hasRole("ADMIN")
+
+                .antMatchers(HttpMethod.GET, "/deliveryRequests/all").permitAll()
+                .antMatchers(HttpMethod.GET, "/deliveryRequests/{id}").permitAll()
+                .antMatchers(HttpMethod.POST, "/deliveryRequests/create").permitAll()
+                .antMatchers(HttpMethod.PUT, "/deliveryRequests/{id}").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/deliveryRequests/delete/{id}").hasRole("ADMIN")
 
-                .antMatchers("/authenticated").authenticated()
+                .antMatchers(HttpMethod.GET, "/pictures/upload").permitAll()
+                .antMatchers(HttpMethod.GET, "/pictures/download/{fileName").permitAll()
+                .antMatchers(HttpMethod.GET, "/pictures/delete").hasRole("ADMIN")
+
+
                 .antMatchers("/authenticate").permitAll()
                 .and()
                 .sessionManagement()
