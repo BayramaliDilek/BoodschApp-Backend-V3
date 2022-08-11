@@ -81,11 +81,6 @@ public class ProductServiceImpl implements ProductService {
         product.setProductType(product.getProductType());
         product.setDescription(product.getDescription());
         product.setIngredients(product.getIngredients());
-
-//        double doubleValue = product.getPrice();
-//        BigDecimal bigDecimalDouble = new BigDecimal(doubleValue);
-//        BigDecimal bigDecimalWithScale = bigDecimalDouble.setScale(2, RoundingMode.HALF_UP);
-
         product.setPrice(product.getPrice());
 
         return productRepository.save(product);
