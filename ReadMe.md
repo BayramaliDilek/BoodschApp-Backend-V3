@@ -93,12 +93,12 @@ if not, hierbij de links;
 De volgende gebruikers kunnen gebruikt worden om de applicatie te runnen/testen.
 
 #### ADMIN_ROLE 
-- username: admin
-- password: password
+- gebruikersnaam: admin
+- wachtwoord: password
 
 #### USER_ROLE
-- username: hans
-- password: password
+- gebruikersnaam: hans
+- wachtwoord: password
 
 ## Wie.. wat.. hoe?
 
