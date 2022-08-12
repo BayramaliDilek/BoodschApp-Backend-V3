@@ -20,28 +20,14 @@ INSERT INTO picture ( file_name, content_type, url) VALUES ('Krokantschnitzel.jp
 INSERT INTO picture ( file_name, content_type, url) VALUES ('frambozen.jpg', 'image/jpeg', 'http://localhost:8080/pictures/download/frambozen.jpg');
 INSERT INTO picture ( file_name, content_type, url) VALUES ('ProfilePicSmallFullBodyShotV3.jpg', 'image/jpeg', 'http://localhost:8080/pictures/download/ProfilePicSmallFullBodyShotV3.jpg');
 
+insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode) VALUES (1001, 'Admin', 'istrator', 'Adminweg', '164', 'C', 'Amsterdam', '1052AX');
+insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode) VALUES (1002, 'Hans', 'Hanseblast', 'Admiralengracht', '202', 'C', 'Amsterdam', '1051AX');
 
-insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode) VALUES (1001, 'Hans', 'Hanseblast', 'Admiralengracht', '202', 'C', 'Amsterdam', '1051AX');
-insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode) VALUES (1002, 'Admin', 'istrator', 'Adminweg', '164', 'C', 'Amsterdam', '1052AX');
-insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode) VALUES (1003, 'Harry', 'Gekk', 'Groenestraat', '63', 'C', 'Amsterdam', '1054AX');
-insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode) VALUES (1004, 'Bayla', 'Itzme', 'Graphics&Weblaan', '888', 'A', 'Amsterdam', '1111AA');
-insert into person (id, person_firstname, person_lastname, person_street_name, person_house_number, person_house_number_add, person_city, person_zipcode) VALUES (1005, 'Itzme', 'Creates', 'ItzmeCreatesPuntKom', '2022', 'A', 'Amsterdam', '1056GZ');
+INSERT INTO users (username, id, password, email, enabled, person_id, picture_file_name) VALUES ('admin', 1001, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'admin@test.nl', TRUE, 1001, 'ProfilePicSmallFullBodyShotV3.jpg');
+INSERT INTO users (username, id, password, email, enabled, person_id) VALUES ('hans', 1002, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'hans@test.nl', TRUE, 1002);
 
-
-INSERT INTO users (username, id, password, email, enabled, person_id) VALUES ('admin', 1001, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'admin@test.nl', TRUE, 1002);
-INSERT INTO users (username, id, password, email, enabled, person_id, picture_file_name) VALUES ('Bayla', 1002, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'bayla@test.nl', TRUE, 1004, 'ProfilePicSmallFullBodyShotV3.jpg');
-INSERT INTO users (username, id, password, email, enabled, person_id) VALUES ('harry', 1003, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'harry@test.nl', TRUE, 1003);
-INSERT INTO users (username, id, password, email, enabled, person_id) VALUES ('hans', 1004, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'hans@test.nl', TRUE, 1001);
-INSERT INTO users (username, id, password, email, enabled, person_id) VALUES ('itzme', 1005, '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'itzme@test.nl', TRUE, 1005);
-
-
-INSERT INTO authorities (username, authority) VALUES ('user', 'ROLE_USER');
 INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_ADMIN');
-INSERT INTO authorities (username, authority) VALUES ('Bayla', 'ROLE_ADMIN');
-INSERT INTO authorities (username, authority) VALUES ('harry', 'ROLE_USER');
-INSERT INTO authorities (username, authority) VALUES ('piet', 'ROLE_USER');
 INSERT INTO authorities (username, authority) VALUES ('hans', 'ROLE_USER');
-INSERT INTO authorities (username, authority) VALUES ('itzme', 'ROLE_USER');
 
 
 INSERT INTO products (product_id, product_name, product_type, product_description, product_ingredients, product_price, picture_file_name) VALUES (1001, 'Aardbeien 250gr', 'Fruit', 'Aardbei bevat veel vitamine C. Van de populairste fruitsoorten bevat alleen kiwi meer vitamine C. Aardbeien dragen daarnaast bij aan de inname van foliumzuur. Ze bevatten weinig calorieën.', 'Aardbeien', 2.49, 'aardbeien.jpg');
@@ -66,3 +52,4 @@ INSERT INTO products (product_id, product_name, product_type, product_descriptio
 INSERT INTO products (product_id, product_name, product_type, product_description, product_ingredients, product_price, picture_file_name) VALUES (1020, 'Wahid Halal Kipboterhamworst', 'Slagerij', 'De Wahid kipboterhamworst is perfect om een lekker stevige boterham mee te beleggen.
 Gegarandeerd Halal.', 'Mechanisch gescheiden kippenvlees 58%, water, kippenvlees 11%, aardappelzetmeel, zout, SOJA-EIWIT, voedingszuren: E262, E325, E327, stabilisatoren: E451, E450, kruiden, specerijen, antioxidanten: E316, E301, E331, conserveermiddel: E250.', 1.49, 'halalboterhamworst.jpg');
 
+-- INSERT INTO delivery_request (id, comment, product_list, status, applier_id) VALUES (20220001,'Graag bij de poort afleveren. Wij hebben een hele grote mooie witte poort waar je kunt aanbellen en dan komen wij de boodschappen halen. Alvast bedankt!',  {"1001":"1-x Aardbeien 250gr-_€2.49","1002":"4-x Bramen 125gr-_€11.16","1003":"3-x Frambozen 125gr-_€8.37","1005":"3-x Appels Pink Lady 4st-_€9.57"} , 4 , 1002)
