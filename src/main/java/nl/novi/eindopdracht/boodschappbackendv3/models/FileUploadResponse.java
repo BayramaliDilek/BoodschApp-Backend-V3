@@ -5,7 +5,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "picture")
 public class FileUploadResponse {
-//    Long id;
 
     @Id
     String fileName;
@@ -14,15 +13,6 @@ public class FileUploadResponse {
 
     String url;
 
-//    @Lob
-//    byte[] data;
-
-
-    @OneToOne(mappedBy = "picture")
-    Product product;
-
-    @OneToOne(mappedBy = "picture")
-    User user;
 
 
     public FileUploadResponse(String fileName, String contentType, String url) {
@@ -33,10 +23,6 @@ public class FileUploadResponse {
 
     public FileUploadResponse() {
     }
-
-//    public Long getId() {
-//        return id;
-//    }
 
     public String getFileName() {
         return fileName;
@@ -49,14 +35,6 @@ public class FileUploadResponse {
     public String getUrl() {
         return url;
     }
-
-//    public byte[] getData() {
-//        return data;
-//    }
-
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
