@@ -20,7 +20,8 @@ import java.util.Objects;
 
 @Service
 public class PhotoService {
-    @Value("C:\\Users\\itzmeBAYLA\\IdeaProjects\\BoodschApp-Backend-V3\\uploads")
+//    @Value("C:\\Users\\itzmeBAYLA\\IdeaProjects\\BoodschApp-Backend-V3\\uploads")
+    @Value("${my.upload_location}")
     private Path fileStoragePath;
     private final String fileStorageLocation;
 
@@ -28,7 +29,7 @@ public class PhotoService {
 
 
 
-    public PhotoService(@Value("C:\\Users\\itzmeBAYLA\\IdeaProjects\\BoodschApp-Backend-V3\\uploads") String fileStorageLocation, FileUploadRepository fileUploadRepository) {
+    public PhotoService(@Value("${my.upload_location}") String fileStorageLocation, FileUploadRepository fileUploadRepository) {
         fileStoragePath = Paths.get(fileStorageLocation).toAbsolutePath().normalize();
 
         this.fileStorageLocation = fileStorageLocation;

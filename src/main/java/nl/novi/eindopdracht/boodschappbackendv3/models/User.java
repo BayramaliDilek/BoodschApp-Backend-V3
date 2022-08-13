@@ -2,7 +2,6 @@ package nl.novi.eindopdracht.boodschappbackendv3.models;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity

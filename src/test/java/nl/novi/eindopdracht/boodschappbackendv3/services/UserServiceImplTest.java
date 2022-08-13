@@ -1,6 +1,5 @@
 package nl.novi.eindopdracht.boodschappbackendv3.services;
 
-import nl.novi.eindopdracht.boodschappbackendv3.exceptions.RecordNotFoundException;
 import nl.novi.eindopdracht.boodschappbackendv3.models.Person;
 import nl.novi.eindopdracht.boodschappbackendv3.models.User;
 import nl.novi.eindopdracht.boodschappbackendv3.repositorys.FileUploadRepository;
@@ -16,7 +15,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
