@@ -6,7 +6,6 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.util.Map;
 
-
 @Entity
 public class DeliveryRequest {
 
